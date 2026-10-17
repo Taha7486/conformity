@@ -32,6 +32,7 @@ type Report struct {
 	Gaps          []string        `json:"knownGaps"`
 	Images        []ImageEvidence `json:"images,omitempty"`
 	Disagreements []Disagreement  `json:"disagreements,omitempty"`
+	InputsSHA256  string          `json:"inputsSha256"`
 	Inputs        []InputDigest   `json:"inputs"`
 }
 

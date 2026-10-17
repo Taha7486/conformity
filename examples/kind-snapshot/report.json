@@ -1,0 +1,1324 @@
+{
+  "schemaVersion": "1",
+  "generatedAt": "2026-10-17T15:00:00Z",
+  "tool": "conformity 0.1.0-dev",
+  "source": "directory testdata/input/kind-snapshot",
+  "summary": {
+    "controls": 29,
+    "pass": 12,
+    "fail": 17,
+    "skipped": 0,
+    "noData": 0
+  },
+  "controls": [
+    {
+      "framework": "CIS",
+      "id": "5.1.6",
+      "status": "FAIL",
+      "policies": [
+        "forge-cis-sa-token"
+      ],
+      "counts": {
+        "pass": 9,
+        "fail": 3,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-cis-sa-token",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "set automountServiceAccountToken: false (CIS 5.1.6)"
+        },
+        {
+          "policy": "forge-cis-sa-token",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "set automountServiceAccountToken: false (CIS 5.1.6)"
+        },
+        {
+          "policy": "forge-cis-sa-token",
+          "result": "fail",
+          "resource": "Pod pt/fail-satoken",
+          "message": "set automountServiceAccountToken: false (CIS 5.1.6)"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.2",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-privileged"
+      ],
+      "counts": {
+        "pass": 9,
+        "fail": 3,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-privileged",
+          "result": "fail",
+          "resource": "Deployment pt/fail-deployment",
+          "message": "privileged containers are not allowed (CIS 5.2.2, PSS baseline): app"
+        },
+        {
+          "policy": "forge-pss-privileged",
+          "result": "fail",
+          "resource": "Pod pt/fail-container",
+          "message": "privileged containers are not allowed (CIS 5.2.2, PSS baseline): app"
+        },
+        {
+          "policy": "forge-pss-privileged",
+          "result": "fail",
+          "resource": "Pod pt/fail-deployment-776df798fb-jm5k7",
+          "message": "privileged containers are not allowed (CIS 5.2.2, PSS baseline): app"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.3",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-host-namespaces"
+      ],
+      "counts": {
+        "pass": 11,
+        "fail": 1,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-host-namespaces",
+          "result": "fail",
+          "resource": "Pod pt/fail-host-network",
+          "message": "sharing host namespaces is not allowed (CIS 5.2.3 to 5.2.5, PSS baseline): hostNetwork"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.4",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-host-namespaces"
+      ],
+      "counts": {
+        "pass": 11,
+        "fail": 1,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-host-namespaces",
+          "result": "fail",
+          "resource": "Pod pt/fail-host-network",
+          "message": "sharing host namespaces is not allowed (CIS 5.2.3 to 5.2.5, PSS baseline): hostNetwork"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.5",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-host-namespaces"
+      ],
+      "counts": {
+        "pass": 11,
+        "fail": 1,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-host-namespaces",
+          "result": "fail",
+          "resource": "Pod pt/fail-host-network",
+          "message": "sharing host namespaces is not allowed (CIS 5.2.3 to 5.2.5, PSS baseline): hostNetwork"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.6",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-privilege-escalation"
+      ],
+      "counts": {
+        "pass": 7,
+        "fail": 5,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Deployment pt/fail-deployment",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: app"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Pod pt/fail-container",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: app"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Pod pt/fail-deployment-776df798fb-jm5k7",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: app"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.7",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-run-as-non-root",
+        "forge-pss-run-as-user"
+      ],
+      "counts": {
+        "pass": 21,
+        "fail": 3,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-run-as-non-root",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-run-as-non-root",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-run-as-non-root",
+          "result": "fail",
+          "resource": "Pod pt/fail-unset",
+          "message": "runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: app"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.8",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-capabilities"
+      ],
+      "counts": {
+        "pass": 10,
+        "fail": 2,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.9",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-capabilities"
+      ],
+      "counts": {
+        "pass": 10,
+        "fail": 2,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.10",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-capabilities"
+      ],
+      "counts": {
+        "pass": 10,
+        "fail": 2,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.12",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-host-path"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "CIS",
+      "id": "5.2.13",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-host-ports"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "CIS",
+      "id": "5.4.1",
+      "status": "PASS",
+      "policies": [
+        "forge-cis-secrets-as-files"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "CIS",
+      "id": "5.7.2",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-seccomp"
+      ],
+      "counts": {
+        "pass": 9,
+        "fail": 3,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-seccomp",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-seccomp",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-seccomp",
+          "result": "fail",
+          "resource": "Pod pt/fail-seccomp",
+          "message": "a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2, PSS restricted) for: app"
+        }
+      ]
+    },
+    {
+      "framework": "CIS",
+      "id": "5.7.4",
+      "status": "PASS",
+      "policies": [
+        "forge-cis-default-namespace"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: /proc Mount Type",
+      "title": "/proc Mount Type",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-proc-mount"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: AppArmor",
+      "title": "AppArmor",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-apparmor"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: Host Namespaces",
+      "title": "Host Namespaces",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-host-namespaces"
+      ],
+      "counts": {
+        "pass": 11,
+        "fail": 1,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-host-namespaces",
+          "result": "fail",
+          "resource": "Pod pt/fail-host-network",
+          "message": "sharing host namespaces is not allowed (CIS 5.2.3 to 5.2.5, PSS baseline): hostNetwork"
+        }
+      ]
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: Host Ports",
+      "title": "Host Ports",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-host-ports"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: HostPath Volumes",
+      "title": "HostPath Volumes",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-host-path"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: Privileged Containers",
+      "title": "Privileged Containers",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-privileged"
+      ],
+      "counts": {
+        "pass": 9,
+        "fail": 3,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-privileged",
+          "result": "fail",
+          "resource": "Deployment pt/fail-deployment",
+          "message": "privileged containers are not allowed (CIS 5.2.2, PSS baseline): app"
+        },
+        {
+          "policy": "forge-pss-privileged",
+          "result": "fail",
+          "resource": "Pod pt/fail-container",
+          "message": "privileged containers are not allowed (CIS 5.2.2, PSS baseline): app"
+        },
+        {
+          "policy": "forge-pss-privileged",
+          "result": "fail",
+          "resource": "Pod pt/fail-deployment-776df798fb-jm5k7",
+          "message": "privileged containers are not allowed (CIS 5.2.2, PSS baseline): app"
+        }
+      ]
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: SELinux",
+      "title": "SELinux",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-selinux"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "baseline: Sysctls",
+      "title": "Sysctls",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-sysctls"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "restricted: Capabilities",
+      "title": "Capabilities",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-capabilities"
+      ],
+      "counts": {
+        "pass": 10,
+        "fail": 2,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-capabilities",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner"
+        }
+      ]
+    },
+    {
+      "framework": "PSS",
+      "id": "restricted: Privilege Escalation",
+      "title": "Privilege Escalation",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-privilege-escalation"
+      ],
+      "counts": {
+        "pass": 7,
+        "fail": 5,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Deployment pt/fail-deployment",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: app"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Pod pt/fail-container",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: app"
+        },
+        {
+          "policy": "forge-pss-privilege-escalation",
+          "result": "fail",
+          "resource": "Pod pt/fail-deployment-776df798fb-jm5k7",
+          "message": "allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: app"
+        }
+      ]
+    },
+    {
+      "framework": "PSS",
+      "id": "restricted: Running as Non-root",
+      "title": "Running as Non-root",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-run-as-non-root"
+      ],
+      "counts": {
+        "pass": 9,
+        "fail": 3,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-run-as-non-root",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-run-as-non-root",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-run-as-non-root",
+          "result": "fail",
+          "resource": "Pod pt/fail-unset",
+          "message": "runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: app"
+        }
+      ]
+    },
+    {
+      "framework": "PSS",
+      "id": "restricted: Running as Non-root user",
+      "title": "Running as Non-root user",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-run-as-user"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    },
+    {
+      "framework": "PSS",
+      "id": "restricted: Seccomp",
+      "title": "Seccomp",
+      "status": "FAIL",
+      "policies": [
+        "forge-pss-seccomp"
+      ],
+      "counts": {
+        "pass": 9,
+        "fail": 3,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "findings": [
+        {
+          "policy": "forge-pss-seccomp",
+          "result": "fail",
+          "resource": "Deployment local-path-storage/local-path-provisioner",
+          "message": "a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-seccomp",
+          "result": "fail",
+          "resource": "Pod local-path-storage/local-path-provisioner-67b778fdf6-b7k79",
+          "message": "a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2, PSS restricted) for: local-path-provisioner"
+        },
+        {
+          "policy": "forge-pss-seccomp",
+          "result": "fail",
+          "resource": "Pod pt/fail-seccomp",
+          "message": "a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2, PSS restricted) for: app"
+        }
+      ]
+    },
+    {
+      "framework": "PSS",
+      "id": "restricted: Volume Types",
+      "title": "Volume Types",
+      "status": "PASS",
+      "policies": [
+        "forge-pss-volume-types"
+      ],
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      }
+    }
+  ],
+  "policies": [
+    {
+      "name": "forge-cis-default-namespace",
+      "kind": "ValidatingPolicy",
+      "title": "Do not use the default namespace",
+      "controls": [
+        "CIS 5.7.4"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-cis-sa-token",
+      "kind": "ValidatingPolicy",
+      "title": "Mount service account tokens only where necessary",
+      "controls": [
+        "CIS 5.1.6"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-cis-secrets-as-files",
+      "kind": "ValidatingPolicy",
+      "title": "Prefer secrets as files over environment variables",
+      "controls": [
+        "CIS 5.4.1"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-apparmor",
+      "kind": "ValidatingPolicy",
+      "title": "Restrict AppArmor profiles",
+      "controls": [
+        "PSS baseline: AppArmor"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-capabilities",
+      "kind": "ValidatingPolicy",
+      "title": "Drop all capabilities",
+      "controls": [
+        "CIS 5.2.8",
+        "CIS 5.2.9",
+        "CIS 5.2.10",
+        "PSS restricted: Capabilities"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-host-namespaces",
+      "kind": "ValidatingPolicy",
+      "title": "Disallow host namespaces",
+      "controls": [
+        "CIS 5.2.3",
+        "CIS 5.2.4",
+        "CIS 5.2.5",
+        "PSS baseline: Host Namespaces"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-host-path",
+      "kind": "ValidatingPolicy",
+      "title": "Disallow hostPath volumes",
+      "controls": [
+        "CIS 5.2.12",
+        "PSS baseline: HostPath Volumes"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-host-ports",
+      "kind": "ValidatingPolicy",
+      "title": "Disallow host ports",
+      "controls": [
+        "CIS 5.2.13",
+        "PSS baseline: Host Ports"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-privilege-escalation",
+      "kind": "ValidatingPolicy",
+      "title": "Disallow privilege escalation",
+      "controls": [
+        "CIS 5.2.6",
+        "PSS restricted: Privilege Escalation"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-privileged",
+      "kind": "ValidatingPolicy",
+      "title": "Disallow privileged containers",
+      "controls": [
+        "CIS 5.2.2",
+        "PSS baseline: Privileged Containers"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-proc-mount",
+      "kind": "ValidatingPolicy",
+      "title": "Require the default /proc mount",
+      "controls": [
+        "PSS baseline: /proc Mount Type"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-run-as-non-root",
+      "kind": "ValidatingPolicy",
+      "title": "Require running as non-root",
+      "controls": [
+        "CIS 5.2.7",
+        "PSS restricted: Running as Non-root"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-run-as-user",
+      "kind": "ValidatingPolicy",
+      "title": "Disallow UID 0",
+      "controls": [
+        "CIS 5.2.7",
+        "PSS restricted: Running as Non-root user"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-seccomp",
+      "kind": "ValidatingPolicy",
+      "title": "Require a seccomp profile",
+      "controls": [
+        "CIS 5.7.2",
+        "PSS restricted: Seccomp"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-selinux",
+      "kind": "ValidatingPolicy",
+      "title": "Restrict SELinux options",
+      "controls": [
+        "PSS baseline: SELinux"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-sysctls",
+      "kind": "ValidatingPolicy",
+      "title": "Restrict sysctls to the safe set",
+      "controls": [
+        "PSS baseline: Sysctls"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    },
+    {
+      "name": "forge-pss-volume-types",
+      "kind": "ValidatingPolicy",
+      "title": "Restrict volume types",
+      "controls": [
+        "PSS restricted: Volume Types"
+      ],
+      "ready": true,
+      "validationActions": [
+        "Deny",
+        "Audit"
+      ],
+      "excludedNamespaces": [
+        "argocd",
+        "kube-node-lease",
+        "kube-public",
+        "kube-system",
+        "kyverno",
+        "monitoring",
+        "policy-reporter"
+      ]
+    }
+  ],
+  "policiesWithoutControls": null,
+  "scope": {
+    "reports": 12,
+    "results": 204,
+    "resultsForPoliciesWithoutControls": 0,
+    "resourcesEvaluated": 12,
+    "oldestResult": "2026-10-17T14:47:17Z",
+    "newestResult": "2026-10-17T14:47:25Z",
+    "documentsIgnored": 0
+  },
+  "knownGaps": [
+    "Only controls that a Forge policy enforces appear here. This is not a full CIS Kubernetes Benchmark audit.",
+    "Results exist only for resources that exist when the report is made. A pod that was refused at admission leaves no PolicyReport entry.",
+    "Ephemeral containers (kubectl debug) are not covered by the pod policies.",
+    "A result is as old as the last Kyverno background scan; see the oldest and newest result times.",
+    "Namespaces listed as excluded by a policy are not evaluated by it.",
+    "Rekor evidence (certificate, log entry, inclusion proof) is verified by cosign, not by conformity; tree size and root hash shown come from the log's signed checkpoint."
+  ],
+  "inputsSha256": "61340b519a57f1386f0a434114226765d1ae36cf6c5f63556d638fada004af0c",
+  "inputs": [
+    {
+      "kind": "PolicyReport",
+      "namespace": "local-path-storage",
+      "name": "23d7b151-b491-4f6d-a75f-ed26bd5d5861",
+      "sha256": "61c305f533fe57a8e518c625fdcfb5b163e39a969c8276ba2f3c70d4b64061ff"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "local-path-storage",
+      "name": "bb9a65f3-7d9b-41df-ba56-a123a7043dd7",
+      "sha256": "fd0ac2275a052da69e77acc950b815610e064e83c019c9e7faf11cf5a6b27463"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "20fca42b-6800-4051-b668-ff9f8849cd5d",
+      "sha256": "e783714da20a14a492b33378fd7076dfa9eac4105a23e8e03e586dcde3833eb2"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "35a38b2a-2fe9-43d7-b3d9-cd06b21ddac6",
+      "sha256": "b8aa422f3ebad38daadfbeebbe0b8ec952973223a0dc5382f5884ff5ec01ee12"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "492edb07-a76c-49d6-8286-38503ea7a45b",
+      "sha256": "b196985a559cbfb296d8476b4f04124a4af4157298fb361c41bd3056f3359ac8"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "63211c3d-8fe6-4b00-a3e2-72bc37548cb6",
+      "sha256": "042bac28cb7c3c395a8a050da1dbd8594d750f430068627dde654ca7c59844e5"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "74e3bef5-ca10-4317-a748-9bd752652b43",
+      "sha256": "265dbe5f0a343c87eb1d7197d56ee90e844fbb9e70a3f527fb361a80bcd3e9dc"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "88ac35df-de2d-4d86-8f1d-b97882061089",
+      "sha256": "264bf858c48eee8c4ff34af4dc54e8b434ec9af0c1be0161d58adff57d5fab02"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "8ded6d4f-7b2d-4662-b884-7c2834de25f6",
+      "sha256": "28a177645ede8a68b925b5084937b50ad4c23f9ccff2964b2d511b0fc24338ea"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "cd4efbff-58cc-44c1-84d7-abc1bc932339",
+      "sha256": "1e537707e6f03155b0cbda04272edb151eb282f487b307ce4cec92df0002988d"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "ce499d2b-c5f8-4aaf-9c48-9c90b7bb91fc",
+      "sha256": "c5e38cdb17dc14184d7accd63343552b056d0e2409da87f5c5459c34b5f9554c"
+    },
+    {
+      "kind": "PolicyReport",
+      "namespace": "pt",
+      "name": "e2f4fe95-073b-4f84-8a58-0a99b3044960",
+      "sha256": "bae4ce05bb69255326f727b30073b6486dbd8ab68c3720eeb44023aece22e679"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-cis-default-namespace",
+      "sha256": "356c03319d76cb77320d27bbbd70fb07447cd94f441b21ae575e240da366276e"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-cis-sa-token",
+      "sha256": "56c81f4614ef55ea61970f341ea1e462156b82cad863bbb6570d122f19d2b375"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-cis-secrets-as-files",
+      "sha256": "bac9c01c4322835a895bf73366d5f42530600bbf5e0f176056b84f5e5a049987"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-apparmor",
+      "sha256": "e014e267ba5c89cda590824a17264cb672e2b2364804be7c5444cd5cc7824363"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-capabilities",
+      "sha256": "2cc4bf5af56cc9183e4b5e84d6a1181d5db97af9100e1efeabac99273f848756"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-host-namespaces",
+      "sha256": "4a0b05c05cbc71b4e7fb5f3e44e7c7c4d68e64a7f3a58371f02b8ec17161f611"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-host-path",
+      "sha256": "bf7fe78a6b7cd5d6361c65944669796f5cc7de860405ed07abb692cbcc6ea70d"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-host-ports",
+      "sha256": "94aa7c94fc23e463a8a026a83ab44f1d922e99518ef2bb3feea9bd6cef0df638"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-privilege-escalation",
+      "sha256": "e62327d195f4795b0674815b027db05539ab5770beb2d1634609e333a34e8fcf"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-privileged",
+      "sha256": "bd16123608a91d0743071fd77cd16e9ce40592a54db88c7bd7fe1ddc3ac45396"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-proc-mount",
+      "sha256": "5c3042643b052f02d6fbb0b44e8a9c3d7c51e22fdc7f78e539ddefb3bff19f63"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-run-as-non-root",
+      "sha256": "750792b8cce8ca4a119b36fe3763e789798eb64cbd57297306b41d4a69be9165"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-run-as-user",
+      "sha256": "072251cad5a4cab9076f2ec41c9a3e14ccd39f1fedd9a0782844110a5f08527a"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-seccomp",
+      "sha256": "7298bb2a0f9907983d2810d7b425ab16f4f8bbe086b3553a109f611b31a65922"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-selinux",
+      "sha256": "6b62dda5c12aba9eebcfa2775404dcde4bea140fd603d75b39f74fe740b1a061"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-sysctls",
+      "sha256": "00bf8f178c7e9f09fd9955b7ca2a012ade0c2dc6693603fd44c7033e54c82d37"
+    },
+    {
+      "kind": "ValidatingPolicy",
+      "name": "forge-pss-volume-types",
+      "sha256": "9bd60d29ab915be691287e9a48a863abaac42a3f7aa0d15bc9f32455b2886641"
+    }
+  ]
+}

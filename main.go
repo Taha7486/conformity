@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -15,7 +16,7 @@ import (
 	"github.com/Taha7486/conformity/internal/supply"
 )
 
-const version = "0.0.0-dev"
+const version = "0.1.0-dev"
 
 const usage = `conformity: compliance evidence for a Forge cluster.
 
@@ -36,8 +37,9 @@ Flags of report:
                      (default 1); a FAIL is never repeated
   --max-scan-age D   oldest vulnerability scan that still counts as fresh (default 720h,
                      the window of the ecr-vuln policy)
-  --format text|json output on stdout (default text)
-  --out DIR          also write report.json into DIR
+  --format text|json|md  output on stdout (default text)
+  --out DIR          also write report.md and report.json into DIR
+  --strict           exit with code 3 when any control is FAIL (default: exit 0)
   --now TIME         RFC 3339 time to stamp the report with (default: the clock)
 `
 
@@ -54,6 +56,9 @@ func main() {
 	case "report":
 		if err := runReport(os.Args[2:]); err != nil {
 			fmt.Fprintln(os.Stderr, "conformity:", err)
+			if errors.Is(err, errStrict) {
+				os.Exit(3)
+			}
 			os.Exit(1)
 		}
 	default:
@@ -75,14 +80,15 @@ func runReport(args []string) error {
 	cosignTimeout := fs.Duration("cosign-timeout", 90*time.Second, "")
 	maxScanAge := fs.Duration("max-scan-age", 720*time.Hour, "")
 	retries := fs.Int("retries", 1, "")
+	strict := fs.Bool("strict", false, "")
 	if err := fs.Parse(args); err != nil {
 		return err
 	}
 	if fs.NArg() > 0 {
 		return fmt.Errorf("unexpected argument %q", fs.Arg(0))
 	}
-	if *format != "text" && *format != "json" {
-		return fmt.Errorf("--format must be text or json, got %q", *format)
+	if *format != "text" && *format != "json" && *format != "md" {
+		return fmt.Errorf("--format must be text, json or md, got %q", *format)
 	}
 	if *dir != "" && (*kubeconfig != "" || *kctx != "") {
 		return fmt.Errorf("--dir cannot be combined with --kubeconfig or --context")
@@ -117,20 +123,40 @@ func runReport(args []string) error {
 		if err := os.MkdirAll(*out, 0o755); err != nil {
 			return err
 		}
-		f, err := os.Create(filepath.Join(*out, "report.json"))
-		if err != nil {
-			return err
-		}
-		if err := report.WriteJSON(f, rep); err != nil {
-			f.Close()
-			return err
-		}
-		if err := f.Close(); err != nil {
-			return err
+		for name, write := range map[string]func(*os.File) error{
+			"report.json": func(f *os.File) error { return report.WriteJSON(f, rep) },
+			"report.md":   func(f *os.File) error { return report.WriteMarkdown(f, rep) },
+		} {
+			f, err := os.Create(filepath.Join(*out, name))
+			if err != nil {
+				return err
+			}
+			if err := write(f); err != nil {
+				f.Close()
+				return err
+			}
+			if err := f.Close(); err != nil {
+				return err
+			}
 		}
 	}
-	if *format == "json" {
-		return report.WriteJSON(os.Stdout, rep)
+	var err2 error
+	switch *format {
+	case "json":
+		err2 = report.WriteJSON(os.Stdout, rep)
+	case "md":
+		err2 = report.WriteMarkdown(os.Stdout, rep)
+	default:
+		err2 = report.WriteText(os.Stdout, rep)
 	}
-	return report.WriteText(os.Stdout, rep)
+	if err2 != nil {
+		return err2
+	}
+	if *strict && rep.Summary.Fail > 0 {
+		return errStrict
+	}
+	return nil
 }
+
+// errStrict makes main exit with code 3: the report was made, and at least one control is FAIL.
+var errStrict = fmt.Errorf("%w", errors.New("at least one control is FAIL (--strict)"))

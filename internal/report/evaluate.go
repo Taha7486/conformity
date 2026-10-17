@@ -2,6 +2,8 @@ package report
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"sort"
@@ -148,6 +150,7 @@ func EvaluateWith(ctx context.Context, snap *source.Snapshot, opt Options) (*Rep
 	if err != nil {
 		return nil, err
 	}
+	rep.InputsSHA256 = aggregate(rep.Inputs)
 	return rep, nil
 }
 
@@ -358,4 +361,14 @@ func digests(groups ...[]*unstructured.Unstructured) ([]InputDigest, error) {
 		return a.Name < b.Name
 	})
 	return out, nil
+}
+
+// aggregate is one SHA-256 over the sorted list of inputs ("kind namespace/name sha256" per
+// line), so two reports made from the same documents carry the same value.
+func aggregate(in []InputDigest) string {
+	h := sha256.New()
+	for _, d := range in {
+		fmt.Fprintf(h, "%s %s/%s %s\n", d.Kind, d.Namespace, d.Name, d.SHA256)
+	}
+	return hex.EncodeToString(h.Sum(nil))
 }

@@ -1242,6 +1242,7 @@
     "Namespaces listed as excluded by a policy are not evaluated by it.",
     "Rekor evidence (certificate, log entry, inclusion proof) is verified by cosign, not by conformity; tree size and root hash shown come from the log's signed checkpoint."
   ],
+  "inputsSha256": "b3738033ed49117526ed1e074bbe3ae5d501a0485fb53db6531ede2c4852f045",
   "inputs": [
     {
       "kind": "ImageValidatingPolicy",
