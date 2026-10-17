@@ -1,0 +1,5 @@
+# build output
+/conformity
+/dist/
+# generated reports (evidence runs write here)
+/out/
