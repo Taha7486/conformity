@@ -1239,7 +1239,8 @@
     "Results exist only for resources that exist when the report is made. A pod that was refused at admission leaves no PolicyReport entry.",
     "Ephemeral containers (kubectl debug) are not covered by the pod policies.",
     "A result is as old as the last Kyverno background scan; see the oldest and newest result times.",
-    "Namespaces listed as excluded by a policy are not evaluated by it."
+    "Namespaces listed as excluded by a policy are not evaluated by it.",
+    "Rekor evidence (certificate, log entry, inclusion proof) is verified by cosign, not by conformity; tree size and root hash shown come from the log's signed checkpoint."
   ],
   "inputs": [
     {

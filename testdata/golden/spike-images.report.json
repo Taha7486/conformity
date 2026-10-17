@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "1",
+  "generatedAt": "2026-10-17T12:00:00Z",
+  "tool": "test",
+  "cosignVersion": "v3.1.3",
+  "source": "fixtures",
+  "summary": {
+    "controls": 3,
+    "pass": 3,
+    "fail": 0,
+    "skipped": 0,
+    "noData": 0
+  },
+  "controls": [
+    {
+      "framework": "FORGE",
+      "id": "SC-1",
+      "title": "Image signed by the spike workflow",
+      "status": "PASS",
+      "policies": [
+        "spike-ivp"
+      ],
+      "counts": {
+        "pass": 0,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "imageChecks": {
+        "pass": 1,
+        "fail": 0,
+        "error": 0
+      }
+    },
+    {
+      "framework": "FORGE",
+      "id": "SC-2",
+      "title": "Signed SBOM attestation present",
+      "status": "PASS",
+      "policies": [
+        "spike-ivp"
+      ],
+      "counts": {
+        "pass": 0,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "imageChecks": {
+        "pass": 1,
+        "fail": 0,
+        "error": 0
+      }
+    },
+    {
+      "framework": "FORGE",
+      "id": "SC-3",
+      "title": "Signed, fresh vulnerability scan attestation",
+      "status": "PASS",
+      "policies": [
+        "spike-ivp"
+      ],
+      "counts": {
+        "pass": 0,
+        "fail": 0,
+        "warn": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "imageChecks": {
+        "pass": 1,
+        "fail": 0,
+        "error": 0
+      }
+    }
+  ],
+  "policies": [
+    {
+      "name": "spike-ivp",
+      "kind": "ImageValidatingPolicy",
+      "controls": [
+        "FORGE SC-1",
+        "FORGE SC-2",
+        "FORGE SC-3"
+      ],
+      "ready": false,
+      "validationActions": [
+        "Deny"
+      ]
+    }
+  ],
+  "policiesWithoutControls": null,
+  "scope": {
+    "reports": 0,
+    "results": 0,
+    "resultsForPoliciesWithoutControls": 0,
+    "resourcesEvaluated": 0,
+    "documentsIgnored": 0,
+    "imagesFound": 10,
+    "imagesChecked": 1,
+    "maxScanAge": "720h0m0s"
+  },
+  "knownGaps": [
+    "Only controls that a Forge policy enforces appear here. This is not a full CIS Kubernetes Benchmark audit.",
+    "Results exist only for resources that exist when the report is made. A pod that was refused at admission leaves no PolicyReport entry.",
+    "Ephemeral containers (kubectl debug) are not covered by the pod policies.",
+    "A result is as old as the last Kyverno background scan; see the oldest and newest result times.",
+    "Namespaces listed as excluded by a policy are not evaluated by it.",
+    "Rekor evidence (certificate, log entry, inclusion proof) is verified by cosign, not by conformity; tree size and root hash shown come from the log's signed checkpoint."
+  ],
+  "images": [
+    {
+      "ref": "ghcr.io/taha7486/forge-spike-r1@sha256:f5eb8b57a454ab073acb0cea7d6bedfb27d37f48a327ecd65fdb7d9ea5c7c7d5",
+      "pinned": true,
+      "specs": [
+        "ghcr.io/taha7486/forge-spike-r1:golden",
+        "ghcr.io/taha7486/forge-spike-r1@sha256:f5eb8b57a454ab073acb0cea7d6bedfb27d37f48a327ecd65fdb7d9ea5c7c7d5"
+      ],
+      "usedBy": [
+        "demo/golden-pinned",
+        "demo/golden-tag"
+      ],
+      "checks": [
+        {
+          "control": "FORGE SC-1",
+          "policy": "spike-ivp",
+          "check": "signature",
+          "status": "PASS",
+          "digest": "sha256:f5eb8b57a454ab073acb0cea7d6bedfb27d37f48a327ecd65fdb7d9ea5c7c7d5",
+          "attestations": [
+            {
+              "predicateType": "https://sigstore.dev/cosign/sign/v1",
+              "signer": {
+                "subject": "https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main",
+                "issuer": "https://token.actions.githubusercontent.com",
+                "notBefore": "2026-10-02T05:04:10Z",
+                "notAfter": "2026-10-02T05:14:10Z"
+              },
+              "rekor": {
+                "logIndex": "3048288286",
+                "integratedTime": "2026-10-02T05:04:10Z",
+                "logId": "wNI9atQGlz+VWfO6LRygH4QUfY/8W4RFwiT5i5WRgB0=",
+                "kind": "dsse 0.0.1",
+                "inclusionProof": true,
+                "inclusionPromise": true,
+                "treeSize": "2926384039",
+                "rootHash": "mtFZR2tMkQ3dcqWXMYIuwTH7MeNHR3c8fsJA0uF4tiY=",
+                "proofMatchesCheckpoint": true
+              },
+              "binding": "certificate-identity"
+            },
+            {
+              "predicateType": "https://sigstore.dev/cosign/sign/v1",
+              "signer": {
+                "subject": "https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main",
+                "issuer": "https://token.actions.githubusercontent.com",
+                "notBefore": "2026-10-02T06:06:39Z",
+                "notAfter": "2026-10-02T06:16:39Z"
+              },
+              "rekor": {
+                "logIndex": "3049190029",
+                "integratedTime": "2026-10-02T06:06:39Z",
+                "logId": "wNI9atQGlz+VWfO6LRygH4QUfY/8W4RFwiT5i5WRgB0=",
+                "kind": "dsse 0.0.1",
+                "inclusionProof": true,
+                "inclusionPromise": true,
+                "treeSize": "2927285800",
+                "rootHash": "m1ilOFcHfc/n56ymuk7izDj1R0ibMe+rY9fOVjbH8t0=",
+                "proofMatchesCheckpoint": true
+              },
+              "binding": "certificate-identity"
+            }
+          ]
+        },
+        {
+          "control": "FORGE SC-2",
+          "policy": "spike-ivp",
+          "check": "sbom",
+          "status": "PASS",
+          "digest": "sha256:f5eb8b57a454ab073acb0cea7d6bedfb27d37f48a327ecd65fdb7d9ea5c7c7d5",
+          "attestations": [
+            {
+              "predicateType": "https://cyclonedx.org/bom",
+              "signer": {
+                "subject": "https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main",
+                "issuer": "https://token.actions.githubusercontent.com",
+                "notBefore": "2026-10-02T05:04:14Z",
+                "notAfter": "2026-10-02T05:14:14Z"
+              },
+              "rekor": {
+                "logIndex": "3048288702",
+                "integratedTime": "2026-10-02T05:04:14Z",
+                "logId": "wNI9atQGlz+VWfO6LRygH4QUfY/8W4RFwiT5i5WRgB0=",
+                "kind": "dsse 0.0.1",
+                "inclusionProof": true,
+                "inclusionPromise": true,
+                "treeSize": "2926384463",
+                "rootHash": "GDT662NWlH8t9RwOuegbvyv+Eys16AlNyA44TjgzKcA=",
+                "proofMatchesCheckpoint": true
+              },
+              "binding": "dsse-signature"
+            }
+          ]
+        },
+        {
+          "control": "FORGE SC-3",
+          "policy": "spike-ivp",
+          "check": "vuln",
+          "status": "PASS",
+          "digest": "sha256:f5eb8b57a454ab073acb0cea7d6bedfb27d37f48a327ecd65fdb7d9ea5c7c7d5",
+          "attestations": [
+            {
+              "predicateType": "https://cosign.sigstore.dev/attestation/vuln/v1",
+              "signer": {
+                "subject": "https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main",
+                "issuer": "https://token.actions.githubusercontent.com",
+                "notBefore": "2026-10-02T06:06:43Z",
+                "notAfter": "2026-10-02T06:16:43Z"
+              },
+              "rekor": {
+                "logIndex": "3049191141",
+                "integratedTime": "2026-10-02T06:06:44Z",
+                "logId": "wNI9atQGlz+VWfO6LRygH4QUfY/8W4RFwiT5i5WRgB0=",
+                "kind": "dsse 0.0.1",
+                "inclusionProof": true,
+                "inclusionPromise": true,
+                "treeSize": "2927286903",
+                "rootHash": "fm0f1RpbP9EKtYgUUyFO/P5aFZmdFyDfkbZr3SOMUrU=",
+                "proofMatchesCheckpoint": true
+              },
+              "scanFinishedOn": "2026-10-02T06:06:38Z",
+              "binding": "dsse-signature"
+            },
+            {
+              "predicateType": "https://cosign.sigstore.dev/attestation/vuln/v1",
+              "signer": {
+                "subject": "https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main",
+                "issuer": "https://token.actions.githubusercontent.com",
+                "notBefore": "2026-10-02T05:04:17Z",
+                "notAfter": "2026-10-02T05:14:17Z"
+              },
+              "rekor": {
+                "logIndex": "3048289202",
+                "integratedTime": "2026-10-02T05:04:17Z",
+                "logId": "wNI9atQGlz+VWfO6LRygH4QUfY/8W4RFwiT5i5WRgB0=",
+                "kind": "dsse 0.0.1",
+                "inclusionProof": true,
+                "inclusionPromise": true,
+                "treeSize": "2926384956",
+                "rootHash": "Cv27H/jZSZFNtOTPnmBTAH5WM98CxPVhIKJGHJxYba4=",
+                "proofMatchesCheckpoint": true
+              },
+              "scanFinishedOn": "2026-10-02T05:04:09Z",
+              "binding": "dsse-signature"
+            }
+          ],
+          "newestScanAge": "365h53m0s",
+          "maxScanAge": "720h0m0s"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "kind": "ImageValidatingPolicy",
+      "name": "spike-ivp",
+      "sha256": "fe507dcd0fc0ebd1127614b45c6dbba5b8c1f7217baee06bb76b1344afdcac2e"
+    },
+    {
+      "kind": "Pod",
+      "namespace": "demo",
+      "name": "golden-pinned",
+      "sha256": "aac923d26b66741e7e1a15a2d48442244bb3da39ab6cae4b1b95dfc96c4496ba"
+    },
+    {
+      "kind": "Pod",
+      "namespace": "demo",
+      "name": "golden-tag",
+      "sha256": "e89d9063020b3816266c7441990f42eaafc801f7053786c2fee6ab0c63dadf79"
+    }
+  ]
+}

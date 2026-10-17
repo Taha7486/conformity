@@ -1,6 +1,7 @@
 package report
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"sort"
@@ -9,12 +10,31 @@ import (
 
 	"github.com/Taha7486/conformity/internal/catalog"
 	"github.com/Taha7486/conformity/internal/source"
+	"github.com/Taha7486/conformity/internal/supply"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 )
 
-// Evaluate builds the report. It fails (rather than guess) when a policy has an annotation
-// it cannot parse, or when a report document cannot be read.
+// Options control an evaluation.
+type Options struct {
+	Now  time.Time
+	Tool string
+	// Cosign runs the image checks (signature, SBOM, vulnerability scan). Nil skips them, and
+	// the report then rests on the PolicyReports alone.
+	Cosign     supply.Runner
+	MaxScanAge time.Duration // default 720h, the window of the ecr-vuln policy
+	Retries    int           // repeat a cosign call that ended in ERROR this many times
+	RetryDelay time.Duration
+	Progress   func(msg string) // optional, called before each slow step
+}
+
+// Evaluate builds the report from the PolicyReports alone (no image checks).
 func Evaluate(snap *source.Snapshot, now time.Time, tool string) (*Report, error) {
+	return EvaluateWith(context.Background(), snap, Options{Now: now, Tool: tool})
+}
+
+// EvaluateWith builds the report. It fails (rather than guess) when a policy has an
+// annotation it cannot parse, or when a report document cannot be read.
+func EvaluateWith(ctx context.Context, snap *source.Snapshot, opt Options) (*Report, error) {
 	policies, unmapped, err := readPolicies(snap.Policies)
 	if err != nil {
 		return nil, err
@@ -56,13 +76,14 @@ func Evaluate(snap *source.Snapshot, now time.Time, tool string) (*Report, error
 
 	rep := &Report{
 		SchemaVersion: SchemaVersion,
-		GeneratedAt:   now.UTC().Format(time.RFC3339),
-		Tool:          tool,
+		GeneratedAt:   opt.Now.UTC().Format(time.RFC3339),
+		Tool:          opt.Tool,
 		Source:        snap.Origin,
 		Scope:         scope,
 		Gaps:          KnownGaps,
 		Unmapped:      unmapped,
 	}
+	rows := map[string]*ControlRow{}
 	for _, c := range ordered {
 		row := ControlRow{Control: c, Policies: owners[c.Key()]}
 		sort.Strings(row.Policies)
@@ -75,18 +96,41 @@ func Evaluate(snap *source.Snapshot, now time.Time, tool string) (*Report, error
 				}
 			}
 		}
-		sort.Slice(row.Findings, func(i, j int) bool {
-			a, b := row.Findings[i], row.Findings[j]
-			if a.Resource != b.Resource {
-				return a.Resource < b.Resource
-			}
-			if a.Policy != b.Policy {
-				return a.Policy < b.Policy
-			}
-			return a.Rule < b.Rule
-		})
-		row.Status = status(row.Counts)
 		rep.Controls = append(rep.Controls, row)
+	}
+	for i := range rep.Controls {
+		rows[rep.Controls[i].Key()] = &rep.Controls[i]
+	}
+	for _, p := range policies {
+		info := p.PolicyInfo
+		for _, c := range p.controls {
+			info.Controls = append(info.Controls, c.Key())
+		}
+		rep.Policies = append(rep.Policies, info)
+	}
+	sort.Slice(rep.Policies, func(i, j int) bool { return rep.Policies[i].Name < rep.Policies[j].Name })
+
+	var usedPods []*unstructured.Unstructured
+	if opt.Cosign != nil {
+		usedPods, err = checkImages(ctx, rep, rows, policies, results, snap, opt)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	for i := range rep.Controls {
+		row := &rep.Controls[i]
+		sort.Slice(row.Findings, func(a, b int) bool {
+			x, y := row.Findings[a], row.Findings[b]
+			if x.Resource != y.Resource {
+				return x.Resource < y.Resource
+			}
+			if x.Policy != y.Policy {
+				return x.Policy < y.Policy
+			}
+			return x.Rule < y.Rule
+		})
+		row.Status = status(row.Counts, row.ImageChecks)
 		rep.Summary.Controls++
 		switch row.Status {
 		case StatusPass:
@@ -99,16 +143,8 @@ func Evaluate(snap *source.Snapshot, now time.Time, tool string) (*Report, error
 			rep.Summary.NoData++
 		}
 	}
-	for _, p := range policies {
-		info := p.PolicyInfo
-		for _, c := range p.controls {
-			info.Controls = append(info.Controls, c.Key())
-		}
-		rep.Policies = append(rep.Policies, info)
-	}
-	sort.Slice(rep.Policies, func(i, j int) bool { return rep.Policies[i].Name < rep.Policies[j].Name })
 
-	rep.Inputs, err = digests(snap)
+	rep.Inputs, err = digests(snap.Policies, snap.Reports, usedPods)
 	if err != nil {
 		return nil, err
 	}
@@ -134,11 +170,15 @@ func (c *Counts) add(r string) {
 	}
 }
 
-func status(c Counts) string {
+func status(c Counts, ic *ImageCounts) string {
+	var imgBad, imgPass int
+	if ic != nil {
+		imgBad, imgPass = ic.Fail+ic.Error, ic.Pass
+	}
 	switch {
-	case c.Fail+c.Warn+c.Error > 0:
+	case c.Fail+c.Warn+c.Error+imgBad > 0:
 		return StatusFail
-	case c.Pass > 0:
+	case c.Pass+imgPass > 0:
 		return StatusPass
 	case c.Skip > 0:
 		return StatusSkip
@@ -150,6 +190,7 @@ func status(c Counts) string {
 type policy struct {
 	PolicyInfo
 	controls []catalog.Control
+	obj      *unstructured.Unstructured
 }
 
 func readPolicies(docs []*unstructured.Unstructured) ([]policy, []string, error) {
@@ -178,7 +219,7 @@ func readPolicies(docs []*unstructured.Unstructured) ([]policy, []string, error)
 		info.Ready, _, _ = unstructured.NestedBool(d.Object, "status", "conditionStatus", "ready")
 		info.Actions, _, _ = unstructured.NestedStringSlice(d.Object, "spec", "validationActions")
 		info.ExcludedNamespaces = excludedNamespaces(d)
-		out = append(out, policy{PolicyInfo: info, controls: cs})
+		out = append(out, policy{PolicyInfo: info, controls: cs, obj: d})
 	}
 	if len(errs) > 0 {
 		return nil, nil, fmt.Errorf("cannot build the control catalog:\n  %s", strings.Join(errs, "\n  "))
@@ -295,9 +336,9 @@ func readResults(docs []*unstructured.Unstructured) ([]result, Scope, error) {
 	return out, scope, nil
 }
 
-func digests(snap *source.Snapshot) ([]InputDigest, error) {
+func digests(groups ...[]*unstructured.Unstructured) ([]InputDigest, error) {
 	var out []InputDigest
-	for _, group := range [][]*unstructured.Unstructured{snap.Policies, snap.Reports} {
+	for _, group := range groups {
 		for _, d := range group {
 			h, err := source.Hash(d)
 			if err != nil {

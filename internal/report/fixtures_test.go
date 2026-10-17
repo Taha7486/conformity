@@ -27,6 +27,7 @@ func load(t *testing.T, dirs ...string) *source.Snapshot {
 		}
 		all.Policies = append(all.Policies, s.Policies...)
 		all.Reports = append(all.Reports, s.Reports...)
+		all.Pods = append(all.Pods, s.Pods...)
 		all.Ignored += s.Ignored
 	}
 	return all
@@ -154,4 +155,13 @@ func findingsFor(r *Report, key string) []Finding {
 		}
 	}
 	return nil
+}
+
+func readFile(t *testing.T, parts ...string) []byte {
+	t.Helper()
+	b, err := os.ReadFile(filepath.Join(append([]string{"..", "..", "testdata"}, parts...)...))
+	if err != nil {
+		t.Fatal(err)
+	}
+	return b
 }

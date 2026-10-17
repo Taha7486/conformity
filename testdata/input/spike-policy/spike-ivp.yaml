@@ -1,0 +1,20 @@
+# Test fixture, derived from the policy of the closed R1 spike (forge-spike-r1/policies/r1-ivp.yaml):
+# same image glob and signer identity, reduced to the fields conformity reads, plus the
+# forge.dev/controls annotation. The spike images are public, so the cosign calls can run for real.
+apiVersion: policies.kyverno.io/v1
+kind: ImageValidatingPolicy
+metadata:
+  name: spike-ivp
+  annotations:
+    forge.dev/controls: "FORGE SC-1: Image signed by the spike workflow; FORGE SC-2: Signed SBOM attestation present; FORGE SC-3: Signed, fresh vulnerability scan attestation"
+spec:
+  validationActions: [Deny]
+  matchImageReferences:
+    - glob: "ghcr.io/taha7486/forge-spike-r1*"
+  attestors:
+    - name: forgeci
+      cosign:
+        keyless:
+          identities:
+            - subject: "https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main"
+              issuer: "https://token.actions.githubusercontent.com"

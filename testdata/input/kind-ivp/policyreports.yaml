@@ -1,0 +1,1245 @@
+apiVersion: v1
+items:
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:06Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 13d39053-048e-4e44-a66f-169479e9742e
+    namespace: demo
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: lookalike
+      uid: 13d39053-048e-4e44-a66f-169479e9742e
+    resourceVersion: "2176"
+    uid: a601549d-6dd6-45b0-8415-0990771cc60b
+  results:
+  - message: 'no valid signature from the spike signing workflow for: ghcr.io/taha7486/forge-spike-r1@sha256:bc86a3fd0a92eb9455a9641709fa9bf62e93d8f1c63620fb3ac4583f162536df'
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: fail
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250783
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: lookalike
+    namespace: demo
+    uid: 13d39053-048e-4e44-a66f-169479e9742e
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:57Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 1a316425-a733-4a14-a73d-6259f29c3371
+    namespace: demo
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: golden-tag
+      uid: 1a316425-a733-4a14-a73d-6259f29c3371
+    resourceVersion: "2151"
+    uid: 5fa9bb2c-9278-4296-afd4-38b7b0fd0ab6
+  results:
+  - message: image ghcr.io/taha7486/forge-spike-r1:golden does not have a digest
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: fail
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250777
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: golden-tag
+    namespace: demo
+    uid: 1a316425-a733-4a14-a73d-6259f29c3371
+  summary:
+    error: 0
+    fail: 1
+    pass: 0
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:29:02Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 595dfe66-3b8b-4d90-9a0c-f1c8a200e0fe
+    namespace: demo
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: golden-after
+      uid: 595dfe66-3b8b-4d90-9a0c-f1c8a200e0fe
+    resourceVersion: "2643"
+    uid: 368f7690-a272-432c-96e9-f8102ee52c6d
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250931
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: golden-after
+    namespace: demo
+    uid: 595dfe66-3b8b-4d90-9a0c-f1c8a200e0fe
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:57Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: b6d76fda-b8c6-48ae-b5d1-fff1f6ef2f13
+    namespace: demo
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: unsigned
+      uid: b6d76fda-b8c6-48ae-b5d1-fff1f6ef2f13
+    resourceVersion: "2154"
+    uid: 8b696a32-7ecc-447f-9a3f-9c5ad8f0eee9
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250777
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: unsigned
+    namespace: demo
+    uid: b6d76fda-b8c6-48ae-b5d1-fff1f6ef2f13
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:13Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 26c48374-34c6-4ec7-8ac6-eefa2ae1931b
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kube-controller-manager-forge-ver-control-plane
+      uid: 26c48374-34c6-4ec7-8ac6-eefa2ae1931b
+    resourceVersion: "2088"
+    uid: e1f009d7-1e3c-4e81-b4a5-0b3083f26de4
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kube-controller-manager-forge-ver-control-plane
+    namespace: kube-system
+    uid: 26c48374-34c6-4ec7-8ac6-eefa2ae1931b
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 40ba401b-6e0a-4ae2-99ed-f7f1264389e7
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: coredns-7d764666f9-gtj5f
+      uid: 40ba401b-6e0a-4ae2-99ed-f7f1264389e7
+    resourceVersion: "2102"
+    uid: 9a536afa-7ee1-42bb-af0f-6b5a68d74ca2
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: coredns-7d764666f9-gtj5f
+    namespace: kube-system
+    uid: 40ba401b-6e0a-4ae2-99ed-f7f1264389e7
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 54a1c7f2-b71d-45c2-b62c-e832868aa508
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: coredns-7d764666f9-7g9nh
+      uid: 54a1c7f2-b71d-45c2-b62c-e832868aa508
+    resourceVersion: "2096"
+    uid: e669e382-bb1a-464e-bea2-e4e1c7f15c69
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: coredns-7d764666f9-7g9nh
+    namespace: kube-system
+    uid: 54a1c7f2-b71d-45c2-b62c-e832868aa508
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:27Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 5a7ba73e-7185-4ec1-b124-8f94227bbafd
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: coredns-7d764666f9
+      uid: 5a7ba73e-7185-4ec1-b124-8f94227bbafd
+    resourceVersion: "2149"
+    uid: 6f2a2981-ae7a-4cab-ab8d-aa1fb2221c6a
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250777
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: coredns-7d764666f9
+    namespace: kube-system
+    uid: 5a7ba73e-7185-4ec1-b124-8f94227bbafd
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:13Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 63d40f81-4fbb-4f30-9175-46cd2f619b26
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kube-proxy-zz87r
+      uid: 63d40f81-4fbb-4f30-9175-46cd2f619b26
+    resourceVersion: "2095"
+    uid: da2349af-0224-42a0-9b3a-9aaedcef5599
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kube-proxy-zz87r
+    namespace: kube-system
+    uid: 63d40f81-4fbb-4f30-9175-46cd2f619b26
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 93457215-1b53-4fee-8fc4-9ba1013a2071
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kindnet-rkf45
+      uid: 93457215-1b53-4fee-8fc4-9ba1013a2071
+    resourceVersion: "2116"
+    uid: e5de5b43-4bf8-4390-bb6b-efcae1d4e35e
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kindnet-rkf45
+    namespace: kube-system
+    uid: 93457215-1b53-4fee-8fc4-9ba1013a2071
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 9a7a90b6-68e5-4c3a-a8ed-5e150d7757b2
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: coredns
+      uid: 9a7a90b6-68e5-4c3a-a8ed-5e150d7757b2
+    resourceVersion: "2126"
+    uid: de838ac4-e925-4c60-8414-97df7c16558b
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: coredns
+    namespace: kube-system
+    uid: 9a7a90b6-68e5-4c3a-a8ed-5e150d7757b2
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: a40383a3-99d0-4611-95fd-b5cb6f95625f
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: kindnet
+      uid: a40383a3-99d0-4611-95fd-b5cb6f95625f
+    resourceVersion: "2119"
+    uid: a2fd0ac3-ec7f-4f1f-9e62-c7ad9d251b74
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: kindnet
+    namespace: kube-system
+    uid: a40383a3-99d0-4611-95fd-b5cb6f95625f
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: a79ed62a-ff0c-4faa-b3a4-056a1ca91e77
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: DaemonSet
+      name: kube-proxy
+      uid: a79ed62a-ff0c-4faa-b3a4-056a1ca91e77
+    resourceVersion: "2122"
+    uid: bb21f4df-da7b-4d93-8d5f-ec3759ab7f4c
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: kube-proxy
+    namespace: kube-system
+    uid: a79ed62a-ff0c-4faa-b3a4-056a1ca91e77
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: c1fc77ea-00bf-4963-b3b2-875bd873934b
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: etcd-forge-ver-control-plane
+      uid: c1fc77ea-00bf-4963-b3b2-875bd873934b
+    resourceVersion: "2103"
+    uid: c5e29c50-009e-4318-a5d2-71a50328fafd
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: etcd-forge-ver-control-plane
+    namespace: kube-system
+    uid: c1fc77ea-00bf-4963-b3b2-875bd873934b
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:13Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: c7bbba87-190b-4138-a99e-294d16a774ac
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kube-apiserver-forge-ver-control-plane
+      uid: c7bbba87-190b-4138-a99e-294d16a774ac
+    resourceVersion: "2089"
+    uid: 706d3928-9c13-4c1a-bc23-9e3302196d13
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kube-apiserver-forge-ver-control-plane
+    namespace: kube-system
+    uid: c7bbba87-190b-4138-a99e-294d16a774ac
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: ccc981b4-5519-4222-abd3-ba4de78591a1
+    namespace: kube-system
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kube-scheduler-forge-ver-control-plane
+      uid: ccc981b4-5519-4222-abd3-ba4de78591a1
+    resourceVersion: "2107"
+    uid: 9bcf0fe5-f864-4df2-bdb4-cb4d98b9c67a
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kube-scheduler-forge-ver-control-plane
+    namespace: kube-system
+    uid: ccc981b4-5519-4222-abd3-ba4de78591a1
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 040ed86d-56f6-43e7-a287-1eca8e4d830b
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: kyverno-background-controller
+      uid: 040ed86d-56f6-43e7-a287-1eca8e4d830b
+    resourceVersion: "2128"
+    uid: e74b0218-2030-45ed-8430-7db705340562
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kyverno-background-controller
+    namespace: kyverno
+    uid: 040ed86d-56f6-43e7-a287-1eca8e4d830b
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 0d2f4842-69d2-4db8-b48f-6ff24ec268cf
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-admission-controller-7998f97b55-tvt89
+      uid: 0d2f4842-69d2-4db8-b48f-6ff24ec268cf
+    resourceVersion: "2106"
+    uid: 78053c83-99b7-42fb-bf1b-257555425cbf
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-admission-controller-7998f97b55-tvt89
+    namespace: kyverno
+    uid: 0d2f4842-69d2-4db8-b48f-6ff24ec268cf
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 31c5fdfd-d015-4fd8-85a2-defe7d843194
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-cleanup-controller-65bcf944-8cqzl
+      uid: 31c5fdfd-d015-4fd8-85a2-defe7d843194
+    resourceVersion: "2111"
+    uid: 3a7677e6-078c-4f31-b08a-5d9c11720faa
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-cleanup-controller-65bcf944-8cqzl
+    namespace: kyverno
+    uid: 31c5fdfd-d015-4fd8-85a2-defe7d843194
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 323e66d3-b525-4668-b38c-cdccf67719a3
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: kyverno-cleanup-controller
+      uid: 323e66d3-b525-4668-b38c-cdccf67719a3
+    resourceVersion: "2133"
+    uid: 0e4946e5-8226-4a2c-8f52-9a7004cd3d6a
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kyverno-cleanup-controller
+    namespace: kyverno
+    uid: 323e66d3-b525-4668-b38c-cdccf67719a3
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:27Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 7da469d3-f15b-4236-94da-1a6a0c06a3aa
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: kyverno-admission-controller-7998f97b55
+      uid: 7da469d3-f15b-4236-94da-1a6a0c06a3aa
+    resourceVersion: "2137"
+    uid: de0797b5-f448-4717-8515-a0e81b09409f
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: kyverno-admission-controller-7998f97b55
+    namespace: kyverno
+    uid: 7da469d3-f15b-4236-94da-1a6a0c06a3aa
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 875f8a52-d967-4d63-9664-8eb7a2604eca
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: kyverno-reports-controller
+      uid: 875f8a52-d967-4d63-9664-8eb7a2604eca
+    resourceVersion: "2132"
+    uid: b57c1b24-7f2d-47d0-9c54-9644615db805
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kyverno-reports-controller
+    namespace: kyverno
+    uid: 875f8a52-d967-4d63-9664-8eb7a2604eca
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:27Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 94af7d70-728a-4f40-8362-86fb5a41e5a5
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: kyverno-background-controller-5d44457d9
+      uid: 94af7d70-728a-4f40-8362-86fb5a41e5a5
+    resourceVersion: "2136"
+    uid: 80ad6327-2b13-4ecc-b3b9-a1f93283c80d
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: kyverno-background-controller-5d44457d9
+    namespace: kyverno
+    uid: 94af7d70-728a-4f40-8362-86fb5a41e5a5
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:27Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 9fc6e3b9-dba3-4d84-8ae0-81c39640c1ce
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: kyverno-cleanup-controller-65bcf944
+      uid: 9fc6e3b9-dba3-4d84-8ae0-81c39640c1ce
+    resourceVersion: "2141"
+    uid: cb33d348-a299-4d10-9bac-c23cae5c1191
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250777
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: kyverno-cleanup-controller-65bcf944
+    namespace: kyverno
+    uid: 9fc6e3b9-dba3-4d84-8ae0-81c39640c1ce
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: c54a31a9-8987-4bde-bc07-b31530156f4a
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: kyverno-admission-controller
+      uid: c54a31a9-8987-4bde-bc07-b31530156f4a
+    resourceVersion: "2129"
+    uid: f309f710-3f92-4436-b15d-bf330e04d51a
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kyverno-admission-controller
+    namespace: kyverno
+    uid: c54a31a9-8987-4bde-bc07-b31530156f4a
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: e45e30e4-b9ce-4061-aa35-d30c9a798a62
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-background-controller-5d44457d9-lj88n
+      uid: e45e30e4-b9ce-4061-aa35-d30c9a798a62
+    resourceVersion: "2110"
+    uid: dee0ad28-3214-4510-b049-2948a8883d8a
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-background-controller-5d44457d9-lj88n
+    namespace: kyverno
+    uid: e45e30e4-b9ce-4061-aa35-d30c9a798a62
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:12Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: e62551e9-dfb5-48c1-8f63-3fddcb73e008
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: kyverno-reports-controller-5cd5676d5f-h25j7
+      uid: e62551e9-dfb5-48c1-8f63-3fddcb73e008
+    resourceVersion: "2114"
+    uid: b6b3a23a-e176-4546-b79c-78f6b3689de8
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: kyverno-reports-controller-5cd5676d5f-h25j7
+    namespace: kyverno
+    uid: e62551e9-dfb5-48c1-8f63-3fddcb73e008
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:27Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: f1b43573-0d83-4a61-8611-52c6ad491174
+    namespace: kyverno
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: kyverno-reports-controller-5cd5676d5f
+      uid: f1b43573-0d83-4a61-8611-52c6ad491174
+    resourceVersion: "2140"
+    uid: 2e15880d-f347-4b80-a987-cc6f9607286a
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250777
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: kyverno-reports-controller-5cd5676d5f
+    namespace: kyverno
+    uid: f1b43573-0d83-4a61-8611-52c6ad491174
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:27Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: a1bcffee-4d11-461c-9ced-bfec71e9f895
+    namespace: local-path-storage
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: local-path-provisioner-67b778fdf6
+      uid: a1bcffee-4d11-461c-9ced-bfec71e9f895
+    resourceVersion: "2143"
+    uid: 73f70ae7-db39-49d9-a90c-c4b8974459fc
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250777
+  scope:
+    apiVersion: apps/v1
+    kind: ReplicaSet
+    name: local-path-provisioner-67b778fdf6
+    namespace: local-path-storage
+    uid: a1bcffee-4d11-461c-9ced-bfec71e9f895
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:25:13Z"
+    generation: 4
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: bdf11e8f-c3cc-44c0-9c59-58e9cef01088
+    namespace: local-path-storage
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: local-path-provisioner-67b778fdf6-xzjlb
+      uid: bdf11e8f-c3cc-44c0-9c59-58e9cef01088
+    resourceVersion: "2097"
+    uid: 5b6e9dd5-7795-4f91-9c8f-60a05da250df
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250775
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: local-path-provisioner-67b778fdf6-xzjlb
+    namespace: local-path-storage
+    uid: bdf11e8f-c3cc-44c0-9c59-58e9cef01088
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T15:26:26Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: c5063463-3692-4837-a08c-f386f316ee4b
+    namespace: local-path-storage
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: local-path-provisioner
+      uid: c5063463-3692-4837-a08c-f386f316ee4b
+    resourceVersion: "2123"
+    uid: c4af1bf8-e004-45e2-a61d-842ca94f0d4b
+  results:
+  - message: success
+    policy: spike-ivp
+    properties:
+      process: background scan
+    result: pass
+    rule: spike-ivp
+    scored: true
+    source: KyvernoImageValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792250776
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: local-path-provisioner
+    namespace: local-path-storage
+    uid: c5063463-3692-4837-a08c-f386f316ee4b
+  summary:
+    error: 0
+    fail: 0
+    pass: 1
+    skip: 0
+    warn: 0
+kind: List
+metadata:
+  resourceVersion: ""

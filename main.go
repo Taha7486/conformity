@@ -12,6 +12,7 @@ import (
 
 	"github.com/Taha7486/conformity/internal/report"
 	"github.com/Taha7486/conformity/internal/source"
+	"github.com/Taha7486/conformity/internal/supply"
 )
 
 const version = "0.0.0-dev"
@@ -28,6 +29,13 @@ Flags of report:
                      instead of a cluster
   --kubeconfig FILE  kubeconfig to use (default: KUBECONFIG, then ~/.kube/config)
   --context NAME     kubeconfig context (default: the current one)
+  --skip-images      do not run cosign; the report rests on the PolicyReports alone
+  --cosign PATH      cosign binary (default: cosign from PATH)
+  --cosign-timeout D time limit for one cosign call (default 90s)
+  --retries N        repeat a cosign call that ended in an error (network, TUF) N times
+                     (default 1); a FAIL is never repeated
+  --max-scan-age D   oldest vulnerability scan that still counts as fresh (default 720h,
+                     the window of the ecr-vuln policy)
   --format text|json output on stdout (default text)
   --out DIR          also write report.json into DIR
   --now TIME         RFC 3339 time to stamp the report with (default: the clock)
@@ -62,6 +70,11 @@ func runReport(args []string) error {
 	format := fs.String("format", "text", "")
 	out := fs.String("out", "", "")
 	nowFlag := fs.String("now", "", "")
+	skipImages := fs.Bool("skip-images", false, "")
+	cosignPath := fs.String("cosign", "cosign", "")
+	cosignTimeout := fs.Duration("cosign-timeout", 90*time.Second, "")
+	maxScanAge := fs.Duration("max-scan-age", 720*time.Hour, "")
+	retries := fs.Int("retries", 1, "")
 	if err := fs.Parse(args); err != nil {
 		return err
 	}
@@ -83,7 +96,7 @@ func runReport(args []string) error {
 		now = t
 	}
 
-	var src source.Source = source.Cluster{Kubeconfig: *kubeconfig, Context: *kctx}
+	var src source.Source = source.Cluster{Kubeconfig: *kubeconfig, Context: *kctx, Pods: !*skipImages}
 	if *dir != "" {
 		src = source.Dir{Path: *dir}
 	}
@@ -91,7 +104,12 @@ func runReport(args []string) error {
 	if err != nil {
 		return err
 	}
-	rep, err := report.Evaluate(snap, now, "conformity "+version)
+	opt := report.Options{Now: now, Tool: "conformity " + version, MaxScanAge: *maxScanAge, Retries: *retries, RetryDelay: 3 * time.Second,
+		Progress: func(msg string) { fmt.Fprintln(os.Stderr, "conformity:", msg) }}
+	if !*skipImages {
+		opt.Cosign = supply.Exec{Path: *cosignPath, Timeout: *cosignTimeout}
+	}
+	rep, err := report.EvaluateWith(context.Background(), snap, opt)
 	if err != nil {
 		return err
 	}

@@ -1,0 +1,279 @@
+apiVersion: v1
+items:
+- apiVersion: policies.kyverno.io/v1
+  kind: ImageValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'FORGE SC-1: Image signed by the spike workflow; FORGE SC-2:
+        Signed SBOM attestation present; FORGE SC-3: Signed, fresh vulnerability scan
+        attestation'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ImageValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"FORGE SC-1: Image signed by the spike workflow; FORGE SC-2: Signed SBOM attestation present; FORGE SC-3: Signed, fresh vulnerability scan attestation"},"name":"spike-ivp"},"spec":{"attestations":[{"intoto":{"type":"https://cyclonedx.org/bom"},"name":"sbom"},{"intoto":{"type":"https://cosign.sigstore.dev/attestation/vuln/v1"},"name":"vuln"}],"attestors":[{"cosign":{"keyless":{"identities":[{"issuer":"https://token.actions.githubusercontent.com","subject":"https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main"}]}},"name":"forgeci"}],"failurePolicy":"Fail","matchConstraints":{"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"matchImageReferences":[{"glob":"ghcr.io/taha7486/forge-spike-r1*"}],"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.sigfail.size() == 0","messageExpression":"'no valid signature from the spike signing workflow for: ' + variables.sigfail.join(', ')"},{"expression":"variables.sbomfail.size() == 0","messageExpression":"'missing or invalid CycloneDX SBOM attestation for: ' + variables.sbomfail.join(', ')"},{"expression":"variables.vulnunverified.size() == 0","messageExpression":"'missing or unverified vulnerability attestation for: ' + variables.vulnunverified.join(', ')"},{"expression":"variables.vulnstale.size() == 0","messageExpression":"'stale vulnerability attestation for: ' + variables.vulnstale.join(', ')"}],"variables":[{"expression":"images.containers.filter(i, verifyImageSignatures(i, [attestors.forgeci]) == 0)","name":"sigfail"},{"expression":"images.containers.filter(i,\n  !(verifyAttestationSignatures(i, attestations.sbom, [attestors.forgeci]) \u003e 0 \u0026\u0026\n    extractPayload(i, attestations.sbom).predicate.bomFormat == 'CycloneDX'))","name":"sbomfail"},{"expression":"images.containers.filter(i,\n  verifyAttestationSignatures(i, attestations.vuln, [attestors.forgeci]) == 0)","name":"vulnunverified"},{"expression":"images.containers.filter(i,\n  !(i in variables.vulnunverified) \u0026\u0026\n  !(timestamp(extractPayload(i, attestations.vuln).predicate.metadata.scanFinishedOn) \u003e time.now() - duration('720h')))","name":"vulnstale"}],"webhookConfiguration":{"timeoutSeconds":30}}}
+    creationTimestamp: "2026-10-17T15:25:46Z"
+    generation: 1
+    name: spike-ivp
+    resourceVersion: "1846"
+    uid: 10f7d753-1402-4221-8c08-5d1d400155a2
+  spec:
+    attestations:
+    - intoto:
+        type: https://cyclonedx.org/bom
+      name: sbom
+    - intoto:
+        type: https://cosign.sigstore.dev/attestation/vuln/v1
+      name: vuln
+    attestors:
+    - cosign:
+        keyless:
+          identities:
+          - issuer: https://token.actions.githubusercontent.com
+            subject: https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main
+      name: forgeci
+    failurePolicy: Fail
+    matchConstraints:
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    matchImageReferences:
+    - glob: ghcr.io/taha7486/forge-spike-r1*
+    validationActions:
+    - Deny
+    - Audit
+    validationConfigurations:
+      mutateDigest: true
+      required: true
+      verifyDigest: true
+    validations:
+    - expression: variables.sigfail.size() == 0
+      messageExpression: '''no valid signature from the spike signing workflow for:
+        '' + variables.sigfail.join('', '')'
+    - expression: variables.sbomfail.size() == 0
+      messageExpression: '''missing or invalid CycloneDX SBOM attestation for: ''
+        + variables.sbomfail.join('', '')'
+    - expression: variables.vulnunverified.size() == 0
+      messageExpression: '''missing or unverified vulnerability attestation for: ''
+        + variables.vulnunverified.join('', '')'
+    - expression: variables.vulnstale.size() == 0
+      messageExpression: '''stale vulnerability attestation for: '' + variables.vulnstale.join('',
+        '')'
+    variables:
+    - expression: images.containers.filter(i, verifyImageSignatures(i, [attestors.forgeci])
+        == 0)
+      name: sigfail
+    - expression: |-
+        images.containers.filter(i,
+          !(verifyAttestationSignatures(i, attestations.sbom, [attestors.forgeci]) > 0 &&
+            extractPayload(i, attestations.sbom).predicate.bomFormat == 'CycloneDX'))
+      name: sbomfail
+    - expression: |-
+        images.containers.filter(i,
+          verifyAttestationSignatures(i, attestations.vuln, [attestors.forgeci]) == 0)
+      name: vulnunverified
+    - expression: |-
+        images.containers.filter(i,
+          !(i in variables.vulnunverified) &&
+          !(timestamp(extractPayload(i, attestations.vuln).predicate.metadata.scanFinishedOn) > time.now() - duration('720h')))
+      name: vulnstale
+    webhookConfiguration:
+      timeoutSeconds: 30
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            attestations:
+            - intoto:
+                type: https://cyclonedx.org/bom
+              name: sbom
+            - intoto:
+                type: https://cosign.sigstore.dev/attestation/vuln/v1
+              name: vuln
+            attestors:
+            - cosign:
+                keyless:
+                  identities:
+                  - issuer: https://token.actions.githubusercontent.com
+                    subject: https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main
+              name: forgeci
+            failurePolicy: Fail
+            matchConstraints:
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            matchImageReferences:
+            - glob: ghcr.io/taha7486/forge-spike-r1*
+            validationActions:
+            - Deny
+            - Audit
+            validationConfigurations:
+              mutateDigest: true
+              required: true
+              verifyDigest: true
+            validations:
+            - expression: variables.sigfail.size() == 0
+              messageExpression: '''no valid signature from the spike signing workflow
+                for: '' + variables.sigfail.join('', '')'
+            - expression: variables.sbomfail.size() == 0
+              messageExpression: '''missing or invalid CycloneDX SBOM attestation
+                for: '' + variables.sbomfail.join('', '')'
+            - expression: variables.vulnunverified.size() == 0
+              messageExpression: '''missing or unverified vulnerability attestation
+                for: '' + variables.vulnunverified.join('', '')'
+            - expression: variables.vulnstale.size() == 0
+              messageExpression: '''stale vulnerability attestation for: '' + variables.vulnstale.join('',
+                '')'
+            variables:
+            - expression: images.containers.filter(i, verifyImageSignatures(i, [attestors.forgeci])
+                == 0)
+              name: sigfail
+            - expression: |-
+                images.containers.filter(i,
+                  !(verifyAttestationSignatures(i, attestations.sbom, [attestors.forgeci]) > 0 &&
+                    extractPayload(i, attestations.sbom).predicate.bomFormat == 'CycloneDX'))
+              name: sbomfail
+            - expression: |-
+                images.containers.filter(i,
+                  verifyAttestationSignatures(i, attestations.vuln, [attestors.forgeci]) == 0)
+              name: vulnunverified
+            - expression: |-
+                images.containers.filter(i,
+                  !(i in variables.vulnunverified) &&
+                  !(timestamp(extractPayload(i, attestations.vuln).predicate.metadata.scanFinishedOn) > time.now() - duration('720h')))
+              name: vulnstale
+            webhookConfiguration:
+              timeoutSeconds: 30
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            attestations:
+            - intoto:
+                type: https://cyclonedx.org/bom
+              name: sbom
+            - intoto:
+                type: https://cosign.sigstore.dev/attestation/vuln/v1
+              name: vuln
+            attestors:
+            - cosign:
+                keyless:
+                  identities:
+                  - issuer: https://token.actions.githubusercontent.com
+                    subject: https://github.com/Taha7486/forge-spike-r1/.github/workflows/r1-sign-golden.yml@refs/heads/main
+              name: forgeci
+            failurePolicy: Fail
+            matchConstraints:
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - replicasets
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            matchImageReferences:
+            - glob: ghcr.io/taha7486/forge-spike-r1*
+            validationActions:
+            - Deny
+            - Audit
+            validationConfigurations:
+              mutateDigest: true
+              required: true
+              verifyDigest: true
+            validations:
+            - expression: variables.sigfail.size() == 0
+              messageExpression: '''no valid signature from the spike signing workflow
+                for: '' + variables.sigfail.join('', '')'
+            - expression: variables.sbomfail.size() == 0
+              messageExpression: '''missing or invalid CycloneDX SBOM attestation
+                for: '' + variables.sbomfail.join('', '')'
+            - expression: variables.vulnunverified.size() == 0
+              messageExpression: '''missing or unverified vulnerability attestation
+                for: '' + variables.vulnunverified.join('', '')'
+            - expression: variables.vulnstale.size() == 0
+              messageExpression: '''stale vulnerability attestation for: '' + variables.vulnstale.join('',
+                '')'
+            variables:
+            - expression: images.containers.filter(i, verifyImageSignatures(i, [attestors.forgeci])
+                == 0)
+              name: sigfail
+            - expression: |-
+                images.containers.filter(i,
+                  !(verifyAttestationSignatures(i, attestations.sbom, [attestors.forgeci]) > 0 &&
+                    extractPayload(i, attestations.sbom).predicate.bomFormat == 'CycloneDX'))
+              name: sbomfail
+            - expression: |-
+                images.containers.filter(i,
+                  verifyAttestationSignatures(i, attestations.vuln, [attestors.forgeci]) == 0)
+              name: vulnunverified
+            - expression: |-
+                images.containers.filter(i,
+                  !(i in variables.vulnunverified) &&
+                  !(timestamp(extractPayload(i, attestations.vuln).predicate.metadata.scanFinishedOn) > time.now() - duration('720h')))
+              name: vulnstale
+            webhookConfiguration:
+              timeoutSeconds: 30
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: ReplicaSet
+            resource: replicasets
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T15:25:46Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T15:25:46Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: ""
+      ready: true
+kind: List
+metadata:
+  resourceVersion: ""

@@ -17,7 +17,8 @@ type Snapshot struct {
 	Origin   string // human-readable description of where the data came from
 	Policies []*unstructured.Unstructured
 	Reports  []*unstructured.Unstructured
-	Ignored  int // documents read but not used (other kinds)
+	Pods     []*unstructured.Unstructured // only loaded when image checks are wanted (cluster) or present (directory)
+	Ignored  int                          // documents read but not used (other kinds)
 }
 
 // Source produces a Snapshot.
@@ -34,6 +35,11 @@ const (
 func isPolicy(u *unstructured.Unstructured) bool {
 	gvk := u.GroupVersionKind()
 	return gvk.Group == policyGroup && (gvk.Kind == "ValidatingPolicy" || gvk.Kind == "ImageValidatingPolicy")
+}
+
+func isPod(u *unstructured.Unstructured) bool {
+	gvk := u.GroupVersionKind()
+	return gvk.Group == "" && gvk.Version == "v1" && gvk.Kind == "Pod"
 }
 
 func isReport(u *unstructured.Unstructured) bool {
@@ -61,6 +67,8 @@ func classify(snap *Snapshot, docs []*unstructured.Unstructured) error {
 			snap.Policies = append(snap.Policies, d)
 		case isReport(d):
 			snap.Reports = append(snap.Reports, d)
+		case isPod(d):
+			snap.Pods = append(snap.Pods, d)
 		default:
 			snap.Ignored++
 		}

@@ -1,0 +1,2 @@
+Error: Get "https://no-such-registry.invalid/v2/": dial tcp: lookup no-such-registry.invalid on 127.0.0.53:53: no such host
+error during command execution: Get "https://no-such-registry.invalid/v2/": dial tcp: lookup no-such-registry.invalid on 127.0.0.53:53: no such host

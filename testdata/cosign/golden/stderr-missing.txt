@@ -1,0 +1,2 @@
+Error: GET https://ghcr.io/v2/taha7486/forge-spike-r1/manifests/does-not-exist: MANIFEST_UNKNOWN: manifest unknown
+error during command execution: GET https://ghcr.io/v2/taha7486/forge-spike-r1/manifests/does-not-exist: MANIFEST_UNKNOWN: manifest unknown
