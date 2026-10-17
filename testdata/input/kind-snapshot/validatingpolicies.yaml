@@ -1,0 +1,3539 @@
+apiVersion: v1
+items:
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: CIS 5.7.4
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.7.4","policies.kyverno.io/category":"CIS Kubernetes Benchmark","policies.kyverno.io/severity":"low","policies.kyverno.io/title":"Do not use the default namespace"},"name":"forge-cis-default-namespace"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"namespaceObject.metadata.name != 'default'","messageExpression":"'workloads must not run in the default namespace (CIS 5.7.4)'"}]}}
+      policies.kyverno.io/category: CIS Kubernetes Benchmark
+      policies.kyverno.io/severity: low
+      policies.kyverno.io/title: Do not use the default namespace
+    creationTimestamp: "2026-10-17T14:46:52Z"
+    generation: 1
+    name: forge-cis-default-namespace
+    resourceVersion: "1381"
+    uid: 6ba6114b-e61e-42f2-85db-9e197a321f2e
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: namespaceObject.metadata.name != 'default'
+      messageExpression: '''workloads must not run in the default namespace (CIS 5.7.4)'''
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: namespaceObject.metadata.name != 'default'
+              messageExpression: '''workloads must not run in the default namespace
+                (CIS 5.7.4)'''
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: namespaceObject.metadata.name != 'default'
+              messageExpression: '''workloads must not run in the default namespace
+                (CIS 5.7.4)'''
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:56Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:57Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: CIS 5.1.6
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.1.6","policies.kyverno.io/category":"CIS Kubernetes Benchmark","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Mount service account tokens only where necessary"},"name":"forge-cis-sa-token"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"object.spec.?automountServiceAccountToken.orValue(true) == false","messageExpression":"'set automountServiceAccountToken: false (CIS 5.1.6)'"}]}}
+      policies.kyverno.io/category: CIS Kubernetes Benchmark
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Mount service account tokens only where necessary
+    creationTimestamp: "2026-10-17T14:46:52Z"
+    generation: 1
+    name: forge-cis-sa-token
+    resourceVersion: "1386"
+    uid: 80e12c6c-517a-472f-ae6f-8f0db3725f06
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: object.spec.?automountServiceAccountToken.orValue(true) == false
+      messageExpression: '''set automountServiceAccountToken: false (CIS 5.1.6)'''
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: object.spec.jobTemplate.spec.template.spec.?automountServiceAccountToken.orValue(true)
+                == false
+              messageExpression: '''set automountServiceAccountToken: false (CIS 5.1.6)'''
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: object.spec.template.spec.?automountServiceAccountToken.orValue(true)
+                == false
+              messageExpression: '''set automountServiceAccountToken: false (CIS 5.1.6)'''
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:57Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:57Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: CIS 5.4.1
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.4.1","policies.kyverno.io/category":"CIS Kubernetes Benchmark","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Prefer secrets as files over environment variables"},"name":"forge-cis-secrets-as-files"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'secrets must be mounted as files, not environment variables (CIS 5.4.1) in: ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"variables.containers.filter(c, c.?env.orValue([]).exists(e, e.?valueFrom.?secretKeyRef.hasValue()) || c.?envFrom.orValue([]).exists(e, e.?secretRef.hasValue())).map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: CIS Kubernetes Benchmark
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Prefer secrets as files over environment variables
+    creationTimestamp: "2026-10-17T14:46:53Z"
+    generation: 1
+    name: forge-cis-secrets-as-files
+    resourceVersion: "1393"
+    uid: 7f629127-5029-46fb-b165-a522c12dbce2
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''secrets must be mounted as files, not environment variables
+        (CIS 5.4.1) in: '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: variables.containers.filter(c, c.?env.orValue([]).exists(e, e.?valueFrom.?secretKeyRef.hasValue())
+        || c.?envFrom.orValue([]).exists(e, e.?secretRef.hasValue())).map(c, c.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''secrets must be mounted as files, not environment
+                variables (CIS 5.4.1) in: '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?env.orValue([]).exists(e,
+                e.?valueFrom.?secretKeyRef.hasValue()) || c.?envFrom.orValue([]).exists(e,
+                e.?secretRef.hasValue())).map(c, c.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''secrets must be mounted as files, not environment
+                variables (CIS 5.4.1) in: '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?env.orValue([]).exists(e,
+                e.?valueFrom.?secretKeyRef.hasValue()) || c.?envFrom.orValue([]).exists(e,
+                e.?secretRef.hasValue())).map(c, c.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:58Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:58Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'PSS baseline: AppArmor (no CIS control)'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"PSS baseline: AppArmor (no CIS control)","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Restrict AppArmor profiles"},"name":"forge-pss-apparmor"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'this AppArmor profile is not allowed (PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"['RuntimeDefault', 'Localhost']","name":"allowed"},{"expression":"(object.spec.?securityContext.?appArmorProfile.?type.orValue('RuntimeDefault') in variables.allowed ? [] : ['pod']) + variables.containers.filter(c, !(c.?securityContext.?appArmorProfile.?type.orValue('RuntimeDefault') in variables.allowed)).map(c, c.name) + object.metadata.?annotations.orValue({}).filter(k, k.startsWith('container.apparmor.security.beta.kubernetes.io/') \u0026\u0026 !(object.metadata.annotations[k] == 'runtime/default' || object.metadata.annotations[k].startsWith('localhost/')))","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Restrict AppArmor profiles
+    creationTimestamp: "2026-10-17T14:46:44Z"
+    generation: 1
+    name: forge-pss-apparmor
+    resourceVersion: "1239"
+    uid: ce2432ea-61cd-4cfc-935c-af84ad74dad2
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''this AppArmor profile is not allowed (PSS baseline): ''
+        + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: '[''RuntimeDefault'', ''Localhost'']'
+      name: allowed
+    - expression: '(object.spec.?securityContext.?appArmorProfile.?type.orValue(''RuntimeDefault'')
+        in variables.allowed ? [] : [''pod'']) + variables.containers.filter(c, !(c.?securityContext.?appArmorProfile.?type.orValue(''RuntimeDefault'')
+        in variables.allowed)).map(c, c.name) + object.metadata.?annotations.orValue({}).filter(k,
+        k.startsWith(''container.apparmor.security.beta.kubernetes.io/'') && !(object.metadata.annotations[k]
+        == ''runtime/default'' || object.metadata.annotations[k].startsWith(''localhost/'')))'
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''this AppArmor profile is not allowed (PSS baseline):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '[''RuntimeDefault'', ''Localhost'']'
+              name: allowed
+            - expression: '(object.spec.jobTemplate.spec.template.spec.?securityContext.?appArmorProfile.?type.orValue(''RuntimeDefault'')
+                in variables.allowed ? [] : [''pod'']) + variables.containers.filter(c,
+                !(c.?securityContext.?appArmorProfile.?type.orValue(''RuntimeDefault'')
+                in variables.allowed)).map(c, c.name) + object.spec.jobTemplate.spec.template.metadata.?annotations.orValue({}).filter(k,
+                k.startsWith(''container.apparmor.security.beta.kubernetes.io/'')
+                && !(object.spec.jobTemplate.spec.template.metadata.annotations[k]
+                == ''runtime/default'' || object.spec.jobTemplate.spec.template.metadata.annotations[k].startsWith(''localhost/'')))'
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''this AppArmor profile is not allowed (PSS baseline):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '[''RuntimeDefault'', ''Localhost'']'
+              name: allowed
+            - expression: '(object.spec.template.spec.?securityContext.?appArmorProfile.?type.orValue(''RuntimeDefault'')
+                in variables.allowed ? [] : [''pod'']) + variables.containers.filter(c,
+                !(c.?securityContext.?appArmorProfile.?type.orValue(''RuntimeDefault'')
+                in variables.allowed)).map(c, c.name) + object.spec.template.metadata.?annotations.orValue({}).filter(k,
+                k.startsWith(''container.apparmor.security.beta.kubernetes.io/'')
+                && !(object.spec.template.metadata.annotations[k] == ''runtime/default''
+                || object.spec.template.metadata.annotations[k].startsWith(''localhost/'')))'
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:45Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:46Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.8, 5.2.9, 5.2.10; PSS restricted: Capabilities'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.8, 5.2.9, 5.2.10; PSS restricted: Capabilities","policies.kyverno.io/category":"Pod Security Standards (Restricted)","policies.kyverno.io/severity":"high","policies.kyverno.io/title":"Drop all capabilities"},"name":"forge-pss-capabilities"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.nodrop.size() == 0","messageExpression":"'capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: ' + variables.nodrop.join(', ')"},{"expression":"variables.badadd.size() == 0","messageExpression":"'only NET_BIND_SERVICE may be added (CIS 5.2.8, 5.2.9, PSS restricted) for: ' + variables.badadd.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"variables.containers.filter(c, !c.?securityContext.?capabilities.?drop.orValue([]).exists(d, d == 'ALL')).map(c, c.name)","name":"nodrop"},{"expression":"variables.containers.filter(c, c.?securityContext.?capabilities.?add.orValue([]).exists(a, a != 'NET_BIND_SERVICE')).map(c, c.name)","name":"badadd"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Restricted)
+      policies.kyverno.io/severity: high
+      policies.kyverno.io/title: Drop all capabilities
+    creationTimestamp: "2026-10-17T14:46:46Z"
+    generation: 1
+    name: forge-pss-capabilities
+    resourceVersion: "1263"
+    uid: cd88273d-baea-4d36-a3a2-c823b82377c7
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.nodrop.size() == 0
+      messageExpression: '''capabilities must drop ALL (CIS 5.2.10, PSS restricted)
+        for: '' + variables.nodrop.join('', '')'
+    - expression: variables.badadd.size() == 0
+      messageExpression: '''only NET_BIND_SERVICE may be added (CIS 5.2.8, 5.2.9,
+        PSS restricted) for: '' + variables.badadd.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: variables.containers.filter(c, !c.?securityContext.?capabilities.?drop.orValue([]).exists(d,
+        d == 'ALL')).map(c, c.name)
+      name: nodrop
+    - expression: variables.containers.filter(c, c.?securityContext.?capabilities.?add.orValue([]).exists(a,
+        a != 'NET_BIND_SERVICE')).map(c, c.name)
+      name: badadd
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.nodrop.size() == 0
+              messageExpression: '''capabilities must drop ALL (CIS 5.2.10, PSS restricted)
+                for: '' + variables.nodrop.join('', '')'
+            - expression: variables.badadd.size() == 0
+              messageExpression: '''only NET_BIND_SERVICE may be added (CIS 5.2.8,
+                5.2.9, PSS restricted) for: '' + variables.badadd.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, !c.?securityContext.?capabilities.?drop.orValue([]).exists(d,
+                d == 'ALL')).map(c, c.name)
+              name: nodrop
+            - expression: variables.containers.filter(c, c.?securityContext.?capabilities.?add.orValue([]).exists(a,
+                a != 'NET_BIND_SERVICE')).map(c, c.name)
+              name: badadd
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.nodrop.size() == 0
+              messageExpression: '''capabilities must drop ALL (CIS 5.2.10, PSS restricted)
+                for: '' + variables.nodrop.join('', '')'
+            - expression: variables.badadd.size() == 0
+              messageExpression: '''only NET_BIND_SERVICE may be added (CIS 5.2.8,
+                5.2.9, PSS restricted) for: '' + variables.badadd.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, !c.?securityContext.?capabilities.?drop.orValue([]).exists(d,
+                d == 'ALL')).map(c, c.name)
+              name: nodrop
+            - expression: variables.containers.filter(c, c.?securityContext.?capabilities.?add.orValue([]).exists(a,
+                a != 'NET_BIND_SERVICE')).map(c, c.name)
+              name: badadd
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:48Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:47Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.3, 5.2.4, 5.2.5; PSS baseline: Host Namespaces'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.3, 5.2.4, 5.2.5; PSS baseline: Host Namespaces","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"high","policies.kyverno.io/title":"Disallow host namespaces"},"name":"forge-pss-host-namespaces"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'sharing host namespaces is not allowed (CIS 5.2.3 to 5.2.5, PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"(object.spec.?hostNetwork.orValue(false) == true ? ['hostNetwork'] : []) + (object.spec.?hostPID.orValue(false) == true ? ['hostPID'] : []) + (object.spec.?hostIPC.orValue(false) == true ? ['hostIPC'] : [])","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: high
+      policies.kyverno.io/title: Disallow host namespaces
+    creationTimestamp: "2026-10-17T14:46:47Z"
+    generation: 1
+    name: forge-pss-host-namespaces
+    resourceVersion: "1272"
+    uid: f9a04c4c-03cf-40a1-917d-99e544feaac0
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''sharing host namespaces is not allowed (CIS 5.2.3 to 5.2.5,
+        PSS baseline): '' + variables.offenders.join('', '')'
+    variables:
+    - expression: '(object.spec.?hostNetwork.orValue(false) == true ? [''hostNetwork'']
+        : []) + (object.spec.?hostPID.orValue(false) == true ? [''hostPID''] : [])
+        + (object.spec.?hostIPC.orValue(false) == true ? [''hostIPC''] : [])'
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''sharing host namespaces is not allowed (CIS 5.2.3
+                to 5.2.5, PSS baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: '(object.spec.jobTemplate.spec.template.spec.?hostNetwork.orValue(false)
+                == true ? [''hostNetwork''] : []) + (object.spec.jobTemplate.spec.template.spec.?hostPID.orValue(false)
+                == true ? [''hostPID''] : []) + (object.spec.jobTemplate.spec.template.spec.?hostIPC.orValue(false)
+                == true ? [''hostIPC''] : [])'
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''sharing host namespaces is not allowed (CIS 5.2.3
+                to 5.2.5, PSS baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: '(object.spec.template.spec.?hostNetwork.orValue(false)
+                == true ? [''hostNetwork''] : []) + (object.spec.template.spec.?hostPID.orValue(false)
+                == true ? [''hostPID''] : []) + (object.spec.template.spec.?hostIPC.orValue(false)
+                == true ? [''hostIPC''] : [])'
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:48Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:48Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.12; PSS baseline: HostPath Volumes'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.12; PSS baseline: HostPath Volumes","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"high","policies.kyverno.io/title":"Disallow hostPath volumes"},"name":"forge-pss-host-path"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'hostPath volumes are not allowed (CIS 5.2.12, PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.?volumes.orValue([]).filter(v, has(v.hostPath)).map(v, v.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: high
+      policies.kyverno.io/title: Disallow hostPath volumes
+    creationTimestamp: "2026-10-17T14:46:47Z"
+    generation: 1
+    name: forge-pss-host-path
+    resourceVersion: "1276"
+    uid: 7d3219ff-ac36-49a7-a21d-b5d999760a40
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''hostPath volumes are not allowed (CIS 5.2.12, PSS baseline):
+        '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.?volumes.orValue([]).filter(v, has(v.hostPath)).map(v,
+        v.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''hostPath volumes are not allowed (CIS 5.2.12,
+                PSS baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.?volumes.orValue([]).filter(v,
+                has(v.hostPath)).map(v, v.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''hostPath volumes are not allowed (CIS 5.2.12,
+                PSS baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.?volumes.orValue([]).filter(v,
+                has(v.hostPath)).map(v, v.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:48Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:49Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.13; PSS baseline: Host Ports'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.13; PSS baseline: Host Ports","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Disallow host ports"},"name":"forge-pss-host-ports"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'host ports are not allowed (CIS 5.2.13, PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"variables.containers.filter(c, c.?ports.orValue([]).exists(p, p.?hostPort.orValue(0) \u003e 0)).map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Disallow host ports
+    creationTimestamp: "2026-10-17T14:46:48Z"
+    generation: 1
+    name: forge-pss-host-ports
+    resourceVersion: "1281"
+    uid: 985fcdc4-52a7-4cc4-aa20-1c576d465fe9
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''host ports are not allowed (CIS 5.2.13, PSS baseline):
+        '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: variables.containers.filter(c, c.?ports.orValue([]).exists(p, p.?hostPort.orValue(0)
+        > 0)).map(c, c.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''host ports are not allowed (CIS 5.2.13, PSS baseline):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?ports.orValue([]).exists(p,
+                p.?hostPort.orValue(0) > 0)).map(c, c.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''host ports are not allowed (CIS 5.2.13, PSS baseline):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?ports.orValue([]).exists(p,
+                p.?hostPort.orValue(0) > 0)).map(c, c.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:49Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:49Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.6; PSS restricted: Privilege Escalation'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.6; PSS restricted: Privilege Escalation","policies.kyverno.io/category":"Pod Security Standards (Restricted)","policies.kyverno.io/severity":"high","policies.kyverno.io/title":"Disallow privilege escalation"},"name":"forge-pss-privilege-escalation"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for: ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"variables.containers.filter(c, c.?securityContext.?allowPrivilegeEscalation.orValue(true) != false).map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Restricted)
+      policies.kyverno.io/severity: high
+      policies.kyverno.io/title: Disallow privilege escalation
+    creationTimestamp: "2026-10-17T14:46:48Z"
+    generation: 1
+    name: forge-pss-privilege-escalation
+    resourceVersion: "1304"
+    uid: 14314715-55e3-427b-8219-b3e064388cd5
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''allowPrivilegeEscalation must be false (CIS 5.2.6, PSS
+        restricted) for: '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: variables.containers.filter(c, c.?securityContext.?allowPrivilegeEscalation.orValue(true)
+        != false).map(c, c.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''allowPrivilegeEscalation must be false (CIS 5.2.6,
+                PSS restricted) for: '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?securityContext.?allowPrivilegeEscalation.orValue(true)
+                != false).map(c, c.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''allowPrivilegeEscalation must be false (CIS 5.2.6,
+                PSS restricted) for: '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?securityContext.?allowPrivilegeEscalation.orValue(true)
+                != false).map(c, c.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:51Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:51Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.2; PSS baseline: Privileged Containers'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.2; PSS baseline: Privileged Containers","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"high","policies.kyverno.io/title":"Disallow privileged containers"},"name":"forge-pss-privileged"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'privileged containers are not allowed (CIS 5.2.2, PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"variables.containers.filter(c, c.?securityContext.?privileged.orValue(false) == true).map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: high
+      policies.kyverno.io/title: Disallow privileged containers
+    creationTimestamp: "2026-10-17T14:46:48Z"
+    generation: 1
+    name: forge-pss-privileged
+    resourceVersion: "1290"
+    uid: cd03db2a-9746-40d7-806b-ce5d2d3e177f
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''privileged containers are not allowed (CIS 5.2.2, PSS
+        baseline): '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: variables.containers.filter(c, c.?securityContext.?privileged.orValue(false)
+        == true).map(c, c.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''privileged containers are not allowed (CIS 5.2.2,
+                PSS baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?securityContext.?privileged.orValue(false)
+                == true).map(c, c.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''privileged containers are not allowed (CIS 5.2.2,
+                PSS baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?securityContext.?privileged.orValue(false)
+                == true).map(c, c.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:50Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:50Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'PSS baseline: /proc Mount Type (no CIS control)'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"PSS baseline: /proc Mount Type (no CIS control)","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Require the default /proc mount"},"name":"forge-pss-proc-mount"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'a non-default /proc mount is not allowed (PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"variables.containers.filter(c, c.?securityContext.?procMount.orValue('Default') != 'Default').map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Require the default /proc mount
+    creationTimestamp: "2026-10-17T14:46:49Z"
+    generation: 1
+    name: forge-pss-proc-mount
+    resourceVersion: "1312"
+    uid: 4435bfd3-c323-42f7-9694-c99ba2d36c22
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''a non-default /proc mount is not allowed (PSS baseline):
+        '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: variables.containers.filter(c, c.?securityContext.?procMount.orValue('Default')
+        != 'Default').map(c, c.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''a non-default /proc mount is not allowed (PSS
+                baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?securityContext.?procMount.orValue('Default')
+                != 'Default').map(c, c.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''a non-default /proc mount is not allowed (PSS
+                baseline): '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: variables.containers.filter(c, c.?securityContext.?procMount.orValue('Default')
+                != 'Default').map(c, c.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:51Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:52Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.7; PSS restricted: Running as Non-root'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.7; PSS restricted: Running as Non-root","policies.kyverno.io/category":"Pod Security Standards (Restricted)","policies.kyverno.io/severity":"high","policies.kyverno.io/title":"Require running as non-root"},"name":"forge-pss-run-as-non-root"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"object.spec.?securityContext.?runAsNonRoot.orValue(false)","name":"podNonRoot"},{"expression":"variables.containers.filter(c, c.?securityContext.?runAsNonRoot.orValue(variables.podNonRoot) != true).map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Restricted)
+      policies.kyverno.io/severity: high
+      policies.kyverno.io/title: Require running as non-root
+    creationTimestamp: "2026-10-17T14:46:49Z"
+    generation: 1
+    name: forge-pss-run-as-non-root
+    resourceVersion: "1343"
+    uid: e982561e-9992-48b9-9672-9e5dca625ad0
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''runAsNonRoot must be true (CIS 5.2.7, PSS restricted)
+        for: '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: object.spec.?securityContext.?runAsNonRoot.orValue(false)
+      name: podNonRoot
+    - expression: variables.containers.filter(c, c.?securityContext.?runAsNonRoot.orValue(variables.podNonRoot)
+        != true).map(c, c.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''runAsNonRoot must be true (CIS 5.2.7, PSS restricted)
+                for: '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: object.spec.jobTemplate.spec.template.spec.?securityContext.?runAsNonRoot.orValue(false)
+              name: podNonRoot
+            - expression: variables.containers.filter(c, c.?securityContext.?runAsNonRoot.orValue(variables.podNonRoot)
+                != true).map(c, c.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''runAsNonRoot must be true (CIS 5.2.7, PSS restricted)
+                for: '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: object.spec.template.spec.?securityContext.?runAsNonRoot.orValue(false)
+              name: podNonRoot
+            - expression: variables.containers.filter(c, c.?securityContext.?runAsNonRoot.orValue(variables.podNonRoot)
+                != true).map(c, c.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:52Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:52Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.2.7; PSS restricted: Running as Non-root user'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.2.7; PSS restricted: Running as Non-root user","policies.kyverno.io/category":"Pod Security Standards (Restricted)","policies.kyverno.io/severity":"high","policies.kyverno.io/title":"Disallow UID 0"},"name":"forge-pss-run-as-user"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'runAsUser 0 is not allowed (CIS 5.2.7, PSS restricted): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"(object.spec.?securityContext.?runAsUser.orValue(1) == 0 ? ['pod'] : []) + variables.containers.filter(c, c.?securityContext.?runAsUser.orValue(1) == 0).map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Restricted)
+      policies.kyverno.io/severity: high
+      policies.kyverno.io/title: Disallow UID 0
+    creationTimestamp: "2026-10-17T14:46:50Z"
+    generation: 1
+    name: forge-pss-run-as-user
+    resourceVersion: "1349"
+    uid: d9ec7c01-6ebe-4c93-b58a-0c4af4901299
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''runAsUser 0 is not allowed (CIS 5.2.7, PSS restricted):
+        '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: '(object.spec.?securityContext.?runAsUser.orValue(1) == 0 ? [''pod'']
+        : []) + variables.containers.filter(c, c.?securityContext.?runAsUser.orValue(1)
+        == 0).map(c, c.name)'
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''runAsUser 0 is not allowed (CIS 5.2.7, PSS restricted):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '(object.spec.jobTemplate.spec.template.spec.?securityContext.?runAsUser.orValue(1)
+                == 0 ? [''pod''] : []) + variables.containers.filter(c, c.?securityContext.?runAsUser.orValue(1)
+                == 0).map(c, c.name)'
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''runAsUser 0 is not allowed (CIS 5.2.7, PSS restricted):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '(object.spec.template.spec.?securityContext.?runAsUser.orValue(1)
+                == 0 ? [''pod''] : []) + variables.containers.filter(c, c.?securityContext.?runAsUser.orValue(1)
+                == 0).map(c, c.name)'
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:53Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:54Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'CIS 5.7.2; PSS restricted: Seccomp'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"CIS 5.7.2; PSS restricted: Seccomp","policies.kyverno.io/category":"Pod Security Standards (Restricted)","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Require a seccomp profile"},"name":"forge-pss-seccomp"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2, PSS restricted) for: ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"['RuntimeDefault', 'Localhost']","name":"allowed"},{"expression":"object.spec.?securityContext.?seccompProfile.?type.orValue('')","name":"podSeccomp"},{"expression":"(variables.podSeccomp == '' || variables.podSeccomp in variables.allowed ? [] : ['pod']) + variables.containers.filter(c, !(c.?securityContext.?seccompProfile.?type.orValue(variables.podSeccomp) in variables.allowed)).map(c, c.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Restricted)
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Require a seccomp profile
+    creationTimestamp: "2026-10-17T14:46:51Z"
+    generation: 1
+    name: forge-pss-seccomp
+    resourceVersion: "1356"
+    uid: a1488133-7d0a-4665-a090-f2fc2fa235fe
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''a seccomp profile (RuntimeDefault or Localhost) is required
+        (CIS 5.7.2, PSS restricted) for: '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: '[''RuntimeDefault'', ''Localhost'']'
+      name: allowed
+    - expression: object.spec.?securityContext.?seccompProfile.?type.orValue('')
+      name: podSeccomp
+    - expression: '(variables.podSeccomp == '''' || variables.podSeccomp in variables.allowed
+        ? [] : [''pod'']) + variables.containers.filter(c, !(c.?securityContext.?seccompProfile.?type.orValue(variables.podSeccomp)
+        in variables.allowed)).map(c, c.name)'
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''a seccomp profile (RuntimeDefault or Localhost)
+                is required (CIS 5.7.2, PSS restricted) for: '' + variables.offenders.join('',
+                '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '[''RuntimeDefault'', ''Localhost'']'
+              name: allowed
+            - expression: object.spec.jobTemplate.spec.template.spec.?securityContext.?seccompProfile.?type.orValue('')
+              name: podSeccomp
+            - expression: '(variables.podSeccomp == '''' || variables.podSeccomp in
+                variables.allowed ? [] : [''pod'']) + variables.containers.filter(c,
+                !(c.?securityContext.?seccompProfile.?type.orValue(variables.podSeccomp)
+                in variables.allowed)).map(c, c.name)'
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''a seccomp profile (RuntimeDefault or Localhost)
+                is required (CIS 5.7.2, PSS restricted) for: '' + variables.offenders.join('',
+                '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '[''RuntimeDefault'', ''Localhost'']'
+              name: allowed
+            - expression: object.spec.template.spec.?securityContext.?seccompProfile.?type.orValue('')
+              name: podSeccomp
+            - expression: '(variables.podSeccomp == '''' || variables.podSeccomp in
+                variables.allowed ? [] : [''pod'']) + variables.containers.filter(c,
+                !(c.?securityContext.?seccompProfile.?type.orValue(variables.podSeccomp)
+                in variables.allowed)).map(c, c.name)'
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:54Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:54Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'PSS baseline: SELinux (no CIS control)'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"PSS baseline: SELinux (no CIS control)","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Restrict SELinux options"},"name":"forge-pss-selinux"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'custom SELinux options are not allowed (PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"object.spec.containers + object.spec.?initContainers.orValue([]) + object.spec.?ephemeralContainers.orValue([])","name":"containers"},{"expression":"['', 'container_t', 'container_init_t', 'container_kvm_t', 'container_engine_t']","name":"allowedTypes"},{"expression":"[{'name': dyn('pod'), 'o': object.spec.?securityContext.?seLinuxOptions.orValue({})}] + variables.containers.map(c, {'name': dyn(c.name), 'o': c.?securityContext.?seLinuxOptions.orValue({})})","name":"scopes"},{"expression":"variables.scopes.filter(s, !(s.o.?type.orValue('') in variables.allowedTypes) || s.o.?user.orValue('') != '' || s.o.?role.orValue('') != '').map(s, s.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Restrict SELinux options
+    creationTimestamp: "2026-10-17T14:46:51Z"
+    generation: 1
+    name: forge-pss-selinux
+    resourceVersion: "1359"
+    uid: 286d5101-83b2-49f7-a5bf-49655fd76498
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''custom SELinux options are not allowed (PSS baseline):
+        '' + variables.offenders.join('', '')'
+    variables:
+    - expression: object.spec.containers + object.spec.?initContainers.orValue([])
+        + object.spec.?ephemeralContainers.orValue([])
+      name: containers
+    - expression: '['''', ''container_t'', ''container_init_t'', ''container_kvm_t'',
+        ''container_engine_t'']'
+      name: allowedTypes
+    - expression: '[{''name'': dyn(''pod''), ''o'': object.spec.?securityContext.?seLinuxOptions.orValue({})}]
+        + variables.containers.map(c, {''name'': dyn(c.name), ''o'': c.?securityContext.?seLinuxOptions.orValue({})})'
+      name: scopes
+    - expression: variables.scopes.filter(s, !(s.o.?type.orValue('') in variables.allowedTypes)
+        || s.o.?user.orValue('') != '' || s.o.?role.orValue('') != '').map(s, s.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''custom SELinux options are not allowed (PSS baseline):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.jobTemplate.spec.template.spec.containers +
+                object.spec.jobTemplate.spec.template.spec.?initContainers.orValue([])
+                + object.spec.jobTemplate.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '['''', ''container_t'', ''container_init_t'', ''container_kvm_t'',
+                ''container_engine_t'']'
+              name: allowedTypes
+            - expression: '[{''name'': dyn(''pod''), ''o'': object.spec.jobTemplate.spec.template.spec.?securityContext.?seLinuxOptions.orValue({})}]
+                + variables.containers.map(c, {''name'': dyn(c.name), ''o'': c.?securityContext.?seLinuxOptions.orValue({})})'
+              name: scopes
+            - expression: variables.scopes.filter(s, !(s.o.?type.orValue('') in variables.allowedTypes)
+                || s.o.?user.orValue('') != '' || s.o.?role.orValue('') != '').map(s,
+                s.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''custom SELinux options are not allowed (PSS baseline):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: object.spec.template.spec.containers + object.spec.template.spec.?initContainers.orValue([])
+                + object.spec.template.spec.?ephemeralContainers.orValue([])
+              name: containers
+            - expression: '['''', ''container_t'', ''container_init_t'', ''container_kvm_t'',
+                ''container_engine_t'']'
+              name: allowedTypes
+            - expression: '[{''name'': dyn(''pod''), ''o'': object.spec.template.spec.?securityContext.?seLinuxOptions.orValue({})}]
+                + variables.containers.map(c, {''name'': dyn(c.name), ''o'': c.?securityContext.?seLinuxOptions.orValue({})})'
+              name: scopes
+            - expression: variables.scopes.filter(s, !(s.o.?type.orValue('') in variables.allowedTypes)
+                || s.o.?user.orValue('') != '' || s.o.?role.orValue('') != '').map(s,
+                s.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:55Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:55Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'PSS baseline: Sysctls (no CIS control)'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"PSS baseline: Sysctls (no CIS control)","policies.kyverno.io/category":"Pod Security Standards (Baseline)","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Restrict sysctls to the safe set"},"name":"forge-pss-sysctls"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'this sysctl is not allowed (PSS baseline): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"['kernel.shm_rmid_forced', 'net.ipv4.ip_local_port_range', 'net.ipv4.ip_unprivileged_port_start', 'net.ipv4.tcp_syncookies', 'net.ipv4.ping_group_range', 'net.ipv4.ip_local_reserved_ports', 'net.ipv4.tcp_keepalive_time', 'net.ipv4.tcp_fin_timeout', 'net.ipv4.tcp_keepalive_intvl', 'net.ipv4.tcp_keepalive_probes']","name":"allowed"},{"expression":"object.spec.?securityContext.?sysctls.orValue([]).filter(s, !(s.name in variables.allowed)).map(s, s.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Baseline)
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Restrict sysctls to the safe set
+    creationTimestamp: "2026-10-17T14:46:52Z"
+    generation: 1
+    name: forge-pss-sysctls
+    resourceVersion: "1368"
+    uid: fa512e2b-6ced-45e0-84b2-5fc74446729a
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''this sysctl is not allowed (PSS baseline): '' + variables.offenders.join('',
+        '')'
+    variables:
+    - expression: '[''kernel.shm_rmid_forced'', ''net.ipv4.ip_local_port_range'',
+        ''net.ipv4.ip_unprivileged_port_start'', ''net.ipv4.tcp_syncookies'', ''net.ipv4.ping_group_range'',
+        ''net.ipv4.ip_local_reserved_ports'', ''net.ipv4.tcp_keepalive_time'', ''net.ipv4.tcp_fin_timeout'',
+        ''net.ipv4.tcp_keepalive_intvl'', ''net.ipv4.tcp_keepalive_probes'']'
+      name: allowed
+    - expression: object.spec.?securityContext.?sysctls.orValue([]).filter(s, !(s.name
+        in variables.allowed)).map(s, s.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''this sysctl is not allowed (PSS baseline): ''
+                + variables.offenders.join('', '')'
+            variables:
+            - expression: '[''kernel.shm_rmid_forced'', ''net.ipv4.ip_local_port_range'',
+                ''net.ipv4.ip_unprivileged_port_start'', ''net.ipv4.tcp_syncookies'',
+                ''net.ipv4.ping_group_range'', ''net.ipv4.ip_local_reserved_ports'',
+                ''net.ipv4.tcp_keepalive_time'', ''net.ipv4.tcp_fin_timeout'', ''net.ipv4.tcp_keepalive_intvl'',
+                ''net.ipv4.tcp_keepalive_probes'']'
+              name: allowed
+            - expression: object.spec.jobTemplate.spec.template.spec.?securityContext.?sysctls.orValue([]).filter(s,
+                !(s.name in variables.allowed)).map(s, s.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''this sysctl is not allowed (PSS baseline): ''
+                + variables.offenders.join('', '')'
+            variables:
+            - expression: '[''kernel.shm_rmid_forced'', ''net.ipv4.ip_local_port_range'',
+                ''net.ipv4.ip_unprivileged_port_start'', ''net.ipv4.tcp_syncookies'',
+                ''net.ipv4.ping_group_range'', ''net.ipv4.ip_local_reserved_ports'',
+                ''net.ipv4.tcp_keepalive_time'', ''net.ipv4.tcp_fin_timeout'', ''net.ipv4.tcp_keepalive_intvl'',
+                ''net.ipv4.tcp_keepalive_probes'']'
+              name: allowed
+            - expression: object.spec.template.spec.?securityContext.?sysctls.orValue([]).filter(s,
+                !(s.name in variables.allowed)).map(s, s.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:56Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:56Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+- apiVersion: policies.kyverno.io/v1
+  kind: ValidatingPolicy
+  metadata:
+    annotations:
+      forge.dev/controls: 'PSS restricted: Volume Types (no CIS control)'
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policies.kyverno.io/v1","kind":"ValidatingPolicy","metadata":{"annotations":{"forge.dev/controls":"PSS restricted: Volume Types (no CIS control)","policies.kyverno.io/category":"Pod Security Standards (Restricted)","policies.kyverno.io/severity":"medium","policies.kyverno.io/title":"Restrict volume types"},"name":"forge-pss-volume-types"},"spec":{"autogen":{"podControllers":{"controllers":["deployments","statefulsets","daemonsets","jobs","cronjobs"]}},"failurePolicy":"Fail","matchConstraints":{"namespaceSelector":{"matchExpressions":[{"key":"kubernetes.io/metadata.name","operator":"NotIn","values":["kube-system","kube-node-lease","kube-public","kyverno","argocd","monitoring","policy-reporter"]}]},"resourceRules":[{"apiGroups":[""],"apiVersions":["v1"],"operations":["CREATE"],"resources":["pods"]}]},"validationActions":["Deny","Audit"],"validations":[{"expression":"variables.offenders.size() == 0","messageExpression":"'this volume type is not allowed (PSS restricted): ' + variables.offenders.join(', ')"}],"variables":[{"expression":"['configMap', 'csi', 'downwardAPI', 'emptyDir', 'ephemeral', 'persistentVolumeClaim', 'projected', 'secret']","name":"allowed"},{"expression":"object.spec.?volumes.orValue([]).filter(v, !v.exists(k, k in variables.allowed)).map(v, v.name)","name":"offenders"}]}}
+      policies.kyverno.io/category: Pod Security Standards (Restricted)
+      policies.kyverno.io/severity: medium
+      policies.kyverno.io/title: Restrict volume types
+    creationTimestamp: "2026-10-17T14:46:52Z"
+    generation: 1
+    name: forge-pss-volume-types
+    resourceVersion: "1369"
+    uid: 164b45e7-ea84-41b3-8291-10744f91c561
+  spec:
+    autogen:
+      podControllers:
+        controllers:
+        - deployments
+        - statefulsets
+        - daemonsets
+        - jobs
+        - cronjobs
+    failurePolicy: Fail
+    matchConstraints:
+      namespaceSelector:
+        matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+          - kube-system
+          - kube-node-lease
+          - kube-public
+          - kyverno
+          - argocd
+          - monitoring
+          - policy-reporter
+      resourceRules:
+      - apiGroups:
+        - ""
+        apiVersions:
+        - v1
+        operations:
+        - CREATE
+        resources:
+        - pods
+    validationActions:
+    - Deny
+    - Audit
+    validations:
+    - expression: variables.offenders.size() == 0
+      messageExpression: '''this volume type is not allowed (PSS restricted): '' +
+        variables.offenders.join('', '')'
+    variables:
+    - expression: '[''configMap'', ''csi'', ''downwardAPI'', ''emptyDir'', ''ephemeral'',
+        ''persistentVolumeClaim'', ''projected'', ''secret'']'
+      name: allowed
+    - expression: object.spec.?volumes.orValue([]).filter(v, !v.exists(k, k in variables.allowed)).map(v,
+        v.name)
+      name: offenders
+  status:
+    autogen:
+      configs:
+        cronjobs:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - cronjobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''this volume type is not allowed (PSS restricted):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: '[''configMap'', ''csi'', ''downwardAPI'', ''emptyDir'',
+                ''ephemeral'', ''persistentVolumeClaim'', ''projected'', ''secret'']'
+              name: allowed
+            - expression: object.spec.jobTemplate.spec.template.spec.?volumes.orValue([]).filter(v,
+                !v.exists(k, k in variables.allowed)).map(v, v.name)
+              name: offenders
+          targets:
+          - group: batch
+            kind: CronJob
+            resource: cronjobs
+            version: v1
+        defaults:
+          spec:
+            autogen:
+              podControllers:
+                controllers:
+                - deployments
+                - statefulsets
+                - daemonsets
+                - jobs
+                - cronjobs
+            failurePolicy: Fail
+            matchConstraints:
+              namespaceSelector:
+                matchExpressions:
+                - key: kubernetes.io/metadata.name
+                  operator: NotIn
+                  values:
+                  - kube-system
+                  - kube-node-lease
+                  - kube-public
+                  - kyverno
+                  - argocd
+                  - monitoring
+                  - policy-reporter
+              resourceRules:
+              - apiGroups:
+                - apps
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - daemonsets
+                - deployments
+                - statefulsets
+              - apiGroups:
+                - batch
+                apiVersions:
+                - v1
+                operations:
+                - CREATE
+                resources:
+                - jobs
+            validationActions:
+            - Deny
+            - Audit
+            validations:
+            - expression: variables.offenders.size() == 0
+              messageExpression: '''this volume type is not allowed (PSS restricted):
+                '' + variables.offenders.join('', '')'
+            variables:
+            - expression: '[''configMap'', ''csi'', ''downwardAPI'', ''emptyDir'',
+                ''ephemeral'', ''persistentVolumeClaim'', ''projected'', ''secret'']'
+              name: allowed
+            - expression: object.spec.template.spec.?volumes.orValue([]).filter(v,
+                !v.exists(k, k in variables.allowed)).map(v, v.name)
+              name: offenders
+          targets:
+          - group: apps
+            kind: DaemonSet
+            resource: daemonsets
+            version: v1
+          - group: apps
+            kind: Deployment
+            resource: deployments
+            version: v1
+          - group: apps
+            kind: StatefulSet
+            resource: statefulsets
+            version: v1
+          - group: batch
+            kind: Job
+            resource: jobs
+            version: v1
+    conditionStatus:
+      conditions:
+      - lastTransitionTime: "2026-10-17T14:46:56Z"
+        message: Webhook configured.
+        reason: Succeeded
+        status: "True"
+        type: WebhookConfigured
+      - lastTransitionTime: "2026-10-17T14:46:56Z"
+        message: Policy is ready for reporting.
+        reason: Succeeded
+        status: "True"
+        type: RBACPermissionsGranted
+      message: 'skip generating ValidatingAdmissionPolicy: not enabled.'
+      ready: true
+    generated: false
+kind: List
+metadata:
+  resourceVersion: ""

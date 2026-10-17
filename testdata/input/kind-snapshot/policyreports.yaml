@@ -1,0 +1,2830 @@
+apiVersion: v1
+items:
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:02Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 23d7b151-b491-4f6d-a75f-ed26bd5d5861
+    namespace: local-path-storage
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: local-path-provisioner-67b778fdf6-b7k79
+      uid: 23d7b151-b491-4f6d-a75f-ed26bd5d5861
+    resourceVersion: "1688"
+    uid: 980fdccd-3fdc-41f5-828f-fbeea7650907
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: CIS Kubernetes Benchmark
+    message: 'set automountServiceAccountToken: false (CIS 5.1.6)'
+    policy: forge-cis-sa-token
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Restricted)
+    message: 'capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner'
+    policy: forge-pss-capabilities
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Restricted)
+    message: 'allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for:
+      local-path-provisioner'
+    policy: forge-pss-privilege-escalation
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: 'runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: local-path-provisioner'
+    policy: forge-pss-run-as-non-root
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: 'a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2,
+      PSS restricted) for: local-path-provisioner'
+    policy: forge-pss-seccomp
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: local-path-provisioner-67b778fdf6-b7k79
+    namespace: local-path-storage
+    uid: 23d7b151-b491-4f6d-a75f-ed26bd5d5861
+  summary:
+    error: 0
+    fail: 5
+    pass: 12
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:11Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: bb9a65f3-7d9b-41df-ba56-a123a7043dd7
+    namespace: local-path-storage
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: local-path-provisioner
+      uid: bb9a65f3-7d9b-41df-ba56-a123a7043dd7
+    resourceVersion: "1713"
+    uid: 883c7703-bbe0-48b1-9b89-5d13bf07dcb9
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: CIS Kubernetes Benchmark
+    message: 'set automountServiceAccountToken: false (CIS 5.1.6)'
+    policy: forge-cis-sa-token
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: 'capabilities must drop ALL (CIS 5.2.10, PSS restricted) for: local-path-provisioner'
+    policy: forge-pss-capabilities
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: 'allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for:
+      local-path-provisioner'
+    policy: forge-pss-privilege-escalation
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: 'runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: local-path-provisioner'
+    policy: forge-pss-run-as-non-root
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: 'a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2,
+      PSS restricted) for: local-path-provisioner'
+    policy: forge-pss-seccomp
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: local-path-provisioner
+    namespace: local-path-storage
+    uid: bb9a65f3-7d9b-41df-ba56-a123a7043dd7
+  summary:
+    error: 0
+    fail: 5
+    pass: 12
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:46:59Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 20fca42b-6800-4051-b668-ff9f8849cd5d
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: fail-container
+      uid: 20fca42b-6800-4051-b668-ff9f8849cd5d
+    resourceVersion: "1660"
+    uid: 6842e40a-6081-4916-893c-55e776a104af
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Restricted)
+    message: 'allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for:
+      app'
+    policy: forge-pss-privilege-escalation
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: 'privileged containers are not allowed (CIS 5.2.2, PSS baseline): app'
+    policy: forge-pss-privileged
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248437
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: fail-container
+    namespace: pt
+    uid: 20fca42b-6800-4051-b668-ff9f8849cd5d
+  summary:
+    error: 0
+    fail: 2
+    pass: 15
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:07Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 35a38b2a-2fe9-43d7-b3d9-cd06b21ddac6
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: fail-seccomp
+      uid: 35a38b2a-2fe9-43d7-b3d9-cd06b21ddac6
+    resourceVersion: "1701"
+    uid: e4a69806-c48e-484f-b274-1ee8fc647156
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-privilege-escalation
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: 'a seccomp profile (RuntimeDefault or Localhost) is required (CIS 5.7.2,
+      PSS restricted) for: app'
+    policy: forge-pss-seccomp
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: fail-seccomp
+    namespace: pt
+    uid: 35a38b2a-2fe9-43d7-b3d9-cd06b21ddac6
+  summary:
+    error: 0
+    fail: 1
+    pass: 16
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:00Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 492edb07-a76c-49d6-8286-38503ea7a45b
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: fail-satoken
+      uid: 492edb07-a76c-49d6-8286-38503ea7a45b
+    resourceVersion: "1671"
+    uid: 86fed365-c695-4e3c-a180-88de3b8ab6a7
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: CIS Kubernetes Benchmark
+    message: 'set automountServiceAccountToken: false (CIS 5.1.6)'
+    policy: forge-cis-sa-token
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-privilege-escalation
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: fail-satoken
+    namespace: pt
+    uid: 492edb07-a76c-49d6-8286-38503ea7a45b
+  summary:
+    error: 0
+    fail: 1
+    pass: 16
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:03Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 63211c3d-8fe6-4b00-a3e2-72bc37548cb6
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: pass-compliant
+      uid: 63211c3d-8fe6-4b00-a3e2-72bc37548cb6
+    resourceVersion: "1687"
+    uid: 8db02d22-6b82-43f3-8892-6d0f78687219
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-privilege-escalation
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248441
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248440
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: pass-compliant
+    namespace: pt
+    uid: 63211c3d-8fe6-4b00-a3e2-72bc37548cb6
+  summary:
+    error: 0
+    fail: 0
+    pass: 17
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:01Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 74e3bef5-ca10-4317-a748-9bd752652b43
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: fail-unset
+      uid: 74e3bef5-ca10-4317-a748-9bd752652b43
+    resourceVersion: "1672"
+    uid: c556c77e-5cec-49e0-9ae7-e79b74c0178b
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-privilege-escalation
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: 'runAsNonRoot must be true (CIS 5.2.7, PSS restricted) for: app'
+    policy: forge-pss-run-as-non-root
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248438
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248439
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: fail-unset
+    namespace: pt
+    uid: 74e3bef5-ca10-4317-a748-9bd752652b43
+  summary:
+    error: 0
+    fail: 1
+    pass: 16
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:06Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 88ac35df-de2d-4d86-8f1d-b97882061089
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: fail-deployment-776df798fb-jm5k7
+      uid: 88ac35df-de2d-4d86-8f1d-b97882061089
+    resourceVersion: "1697"
+    uid: 0a5ffb65-3e67-44fb-979a-775a10594c65
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: 'allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for:
+      app'
+    policy: forge-pss-privilege-escalation
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: 'privileged containers are not allowed (CIS 5.2.2, PSS baseline): app'
+    policy: forge-pss-privileged
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: fail-deployment-776df798fb-jm5k7
+    namespace: pt
+    uid: 88ac35df-de2d-4d86-8f1d-b97882061089
+  summary:
+    error: 0
+    fail: 2
+    pass: 15
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:07Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: 8ded6d4f-7b2d-4662-b884-7c2834de25f6
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: pass-deployment-68b9c74886-b77d4
+      uid: 8ded6d4f-7b2d-4662-b884-7c2834de25f6
+    resourceVersion: "1705"
+    uid: ea8d2ef9-8c55-470f-9e28-bd015f90d5c1
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-privilege-escalation
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248443
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: pass-deployment-68b9c74886-b77d4
+    namespace: pt
+    uid: 8ded6d4f-7b2d-4662-b884-7c2834de25f6
+  summary:
+    error: 0
+    fail: 0
+    pass: 17
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:06Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: cd4efbff-58cc-44c1-84d7-abc1bc932339
+    namespace: pt
+    ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: fail-host-network
+      uid: cd4efbff-58cc-44c1-84d7-abc1bc932339
+    resourceVersion: "1699"
+    uid: 3e36ab1e-6ac4-4477-b682-8829da0734ce
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: 'sharing host namespaces is not allowed (CIS 5.2.3 to 5.2.5, PSS baseline):
+      hostNetwork'
+    policy: forge-pss-host-namespaces
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-privilege-escalation
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248442
+  scope:
+    apiVersion: v1
+    kind: Pod
+    name: fail-host-network
+    namespace: pt
+    uid: cd4efbff-58cc-44c1-84d7-abc1bc932339
+  summary:
+    error: 0
+    fail: 1
+    pass: 16
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:12Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: ce499d2b-c5f8-4aaf-9c48-9c90b7bb91fc
+    namespace: pt
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: pass-deployment
+      uid: ce499d2b-c5f8-4aaf-9c48-9c90b7bb91fc
+    resourceVersion: "1717"
+    uid: 47cd19a4-26e4-44a0-878f-02644d629500
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-privilege-escalation
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-privileged
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248445
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: pass-deployment
+    namespace: pt
+    uid: ce499d2b-c5f8-4aaf-9c48-9c90b7bb91fc
+  summary:
+    error: 0
+    fail: 0
+    pass: 17
+    skip: 0
+    warn: 0
+- apiVersion: wgpolicyk8s.io/v1alpha2
+  kind: PolicyReport
+  metadata:
+    creationTimestamp: "2026-10-17T14:47:12Z"
+    generation: 2
+    labels:
+      app.kubernetes.io/managed-by: kyverno
+    name: e2f4fe95-073b-4f84-8a58-0a99b3044960
+    namespace: pt
+    ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: fail-deployment
+      uid: e2f4fe95-073b-4f84-8a58-0a99b3044960
+    resourceVersion: "1714"
+    uid: 7825efb1-8532-4012-97d8-f2482799683a
+  results:
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-default-namespace
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: low
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-sa-token
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: CIS Kubernetes Benchmark
+    message: success
+    policy: forge-cis-secrets-as-files
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-apparmor
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-capabilities
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-namespaces
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-path
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-host-ports
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: 'allowPrivilegeEscalation must be false (CIS 5.2.6, PSS restricted) for:
+      app'
+    policy: forge-pss-privilege-escalation
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: 'privileged containers are not allowed (CIS 5.2.2, PSS baseline): app'
+    policy: forge-pss-privileged
+    properties:
+      cel.validationIndex: "0"
+      process: background scan
+    result: fail
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-proc-mount
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-non-root
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-run-as-user
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: high
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-seccomp
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-selinux
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Baseline)
+    message: success
+    policy: forge-pss-sysctls
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  - category: Pod Security Standards (Restricted)
+    message: success
+    policy: forge-pss-volume-types
+    properties:
+      process: background scan
+    result: pass
+    scored: true
+    severity: medium
+    source: KyvernoValidatingPolicy
+    timestamp:
+      nanos: 0
+      seconds: 1792248444
+  scope:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: fail-deployment
+    namespace: pt
+    uid: e2f4fe95-073b-4f84-8a58-0a99b3044960
+  summary:
+    error: 0
+    fail: 2
+    pass: 15
+    skip: 0
+    warn: 0
+kind: List
+metadata:
+  resourceVersion: ""
