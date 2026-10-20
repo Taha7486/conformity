@@ -529,3 +529,89 @@ func TestStaleKyvernoReportAgainstChangedPolicy(t *testing.T) {
 		t.Errorf("the stale pass for golden-after must be reported: %+v", rep.Disagreements)
 	}
 }
+
+// SC-4 (the registry rule) is a plain ValidatingPolicy with no cosign check: its PolicyReport
+// results are the evidence, also when the image stage runs for the other FORGE controls.
+func TestRegistryRuleIsReportOnlyNextToImagePolicies(t *testing.T) {
+	snap := load(t, "ecr-policies")
+	snap.Policies = append(snap.Policies, doc(t, `apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: forge-ecr-registry
+  annotations: {forge.dev/controls: "FORGE SC-4: Images come only from the allowed registry"}
+spec:
+  validationActions: [Deny, Audit]
+`))
+	snap.Pods = append(snap.Pods, doc(t, `apiVersion: v1
+kind: Pod
+metadata: {name: web, namespace: apps}
+spec:
+  containers:
+  - {name: app, image: "ACCOUNT_ID.dkr.ecr.eu-west-3.amazonaws.com/forge/podinfo:1.0"}
+status:
+  containerStatuses:
+  - {name: app, imageID: "ACCOUNT_ID.dkr.ecr.eu-west-3.amazonaws.com/forge/podinfo@`+digest+`"}
+`))
+	snap.Reports = append(snap.Reports,
+		doc(t, `apiVersion: wgpolicyk8s.io/v1alpha2
+kind: PolicyReport
+metadata: {name: ok, namespace: apps}
+scope: {kind: Pod, name: web, namespace: apps, uid: u1}
+results:
+- {policy: forge-ecr-registry, result: pass, message: success, timestamp: {seconds: 1760000000}}
+`),
+		doc(t, `apiVersion: wgpolicyk8s.io/v1alpha2
+kind: PolicyReport
+metadata: {name: bad, namespace: apps}
+scope: {kind: Pod, name: hub, namespace: apps, uid: u2}
+results:
+- {policy: forge-ecr-registry, result: fail, message: "images must come from the ECR forge/ prefix (FORGE SC-4), not: docker.io/library/nginx:1.27", timestamp: {seconds: 1760000000}}
+`))
+	rec := &recorder{version: "v3.1.3", byCmd: map[string]supply.Result{}}
+	n, _ := time.Parse(time.RFC3339, "2026-10-17T12:00:00Z")
+	rep, err := EvaluateWith(context.Background(), snap, Options{Now: n, Tool: "test", Cosign: rec})
+	if err != nil {
+		t.Fatalf("a registry rule next to image policies must not stop the run: %v", err)
+	}
+	row := controlRow(rep, "FORGE SC-4")
+	if row == nil || row.Status != StatusFail || row.Counts.Pass != 1 || row.Counts.Fail != 1 || row.ImageChecks != nil {
+		t.Fatalf("SC-4 = %+v", row)
+	}
+	if f := findingsFor(rep, "FORGE SC-4"); len(f) != 1 || !strings.Contains(f[0].Message, "docker.io/library/nginx") {
+		t.Errorf("findings = %+v", f)
+	}
+	if rec.count("--certificate-identity") != 3 {
+		t.Errorf("the image policies still get their three cosign checks: %v", rec.calls)
+	}
+	for _, key := range []string{"FORGE SC-1", "FORGE SC-2", "FORGE SC-3"} {
+		if r := controlRow(rep, key); r.ImageChecks == nil {
+			t.Errorf("%s lost its image checks", key)
+		}
+	}
+}
+
+// Without the image stage (--skip-images) SC-4 reads the same way.
+func TestRegistryRuleWithoutImageStage(t *testing.T) {
+	snap := load(t)
+	snap.Policies = []*unstructured.Unstructured{doc(t, `apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: forge-ecr-registry
+  annotations: {forge.dev/controls: "FORGE SC-4: Images come only from the allowed registry"}
+spec: {}
+`)}
+	snap.Reports = append(snap.Reports, doc(t, `apiVersion: wgpolicyk8s.io/v1alpha2
+kind: PolicyReport
+metadata: {name: ok, namespace: apps}
+scope: {kind: Pod, name: web, namespace: apps, uid: u1}
+results:
+- {policy: forge-ecr-registry, result: pass, message: success, timestamp: {seconds: 1760000000}}
+`))
+	rep, err := Evaluate(snap, now, "t")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if row := controlRow(rep, "FORGE SC-4"); row == nil || row.Status != StatusPass {
+		t.Errorf("SC-4 = %+v", row)
+	}
+}

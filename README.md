@@ -53,7 +53,7 @@ have a report.
 ## Image checks (the FORGE controls)
 
 Kyverno says an image was admitted; conformity checks it again on its own. Policies that carry a
-`FORGE SC-n` control are `ImageValidatingPolicy` objects. From each, conformity reads the image globs
+`FORGE SC-1` to `SC-3` control are `ImageValidatingPolicy` objects (`SC-4` is different, see below). From each, conformity reads the image globs
 (`matchImageReferences`) and the exact keyless signer identities (`attestors`); a regular expression,
 a key or any other shape stops the run instead of being guessed. It takes the images of the Pods
 (cluster: all pods; directory: Pod documents), keeps those that match a glob, and for each runs cosign:
@@ -63,6 +63,13 @@ a key or any other shape stops the run instead of being guessed. It takes the im
 | `SC-1` | `cosign verify` | a valid keyless signature from the policy's identity, for the image digest |
 | `SC-2` | `cosign verify-attestation --type https://cyclonedx.org/bom` | a verified CycloneDX SBOM attestation about the digest |
 | `SC-3` | `cosign verify-attestation --type https://cosign.sigstore.dev/attestation/vuln/v1` | a verified scan attestation whose newest `scanFinishedOn` is within `--max-scan-age` |
+
+`SC-4` (images come only from the allowed registry) has no cosign check: it belongs to a plain
+`ValidatingPolicy` (`forge-ecr-registry`), and its status comes from the PolicyReport results alone,
+like the CIS and PSS controls. Any other `FORGE SC-n` is still refused, and so is an `SC-1` to `SC-3`
+control on a policy that is not an `ImageValidatingPolicy`. Tested on fixtures and, on 2026-10-20, against a
+kind cluster with Kyverno 1.19.1 and the real policy (a result of a `ValidatingPolicy` has no `rule`
+field; 1 pass and 5 fail were reported, in text, Markdown and JSON, and `--strict` exited 3). Not run on EKS.
 
 The digest comes from the pod spec, else from the `imageID` the runtime reported; with neither, the
 tag is verified and the report says the image is not pinned. A failure is **FAIL** only when cosign

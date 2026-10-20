@@ -21,6 +21,13 @@ var forgeChecks = map[string]supply.Kind{
 	"SC-3": supply.Vuln,
 }
 
+// FORGE controls that have no image check: Kyverno's PolicyReport results are the whole
+// evidence. SC-4 is the registry rule, a plain ValidatingPolicy; cosign has nothing to say
+// about which registry an image came from.
+var forgeReportOnly = map[string]bool{
+	"SC-4": true,
+}
+
 // imagePolicy is one (policy, control) pair that needs an image check.
 type imagePolicy struct {
 	policy   string
@@ -37,6 +44,9 @@ func imagePolicies(policies []policy) ([]imagePolicy, error) {
 	for _, p := range policies {
 		for _, c := range p.controls {
 			if c.Framework != catalog.FORGE {
+				continue
+			}
+			if forgeReportOnly[c.ID] {
 				continue
 			}
 			kind, ok := forgeChecks[c.ID]
@@ -179,8 +189,8 @@ func checkImages(ctx context.Context, rep *Report, rows map[string]*ControlRow, 
 	// controls, count only the Kyverno results of pods that use an image in the policy's scope.
 	for i := range rep.Controls {
 		row := &rep.Controls[i]
-		if row.Framework != catalog.FORGE {
-			continue
+		if row.Framework != catalog.FORGE || row.ImageChecks == nil {
+			continue // not an image control: its PolicyReport counts stand as they are
 		}
 		row.Counts, row.Findings = Counts{}, nil
 		for _, pn := range row.Policies {
