@@ -118,6 +118,8 @@ func EvaluateWith(ctx context.Context, snap *source.Snapshot, opt Options) (*Rep
 		if err != nil {
 			return nil, err
 		}
+	} else {
+		skipImageControls(rep)
 	}
 
 	for i := range rep.Controls {

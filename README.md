@@ -33,7 +33,7 @@ go build -o conformity .
 | `--out DIR` | also write `report.md` and `report.json` into DIR |
 | `--strict` | exit with code 3 when any control is FAIL (default: exit 0; errors exit 1) |
 | `--now TIME` | RFC 3339 time to stamp the report with, so the same input gives the same bytes |
-| `--skip-images` | do not run cosign; the report rests on the PolicyReports alone and works offline |
+| `--skip-images` | do not run cosign; the report rests on the PolicyReports alone and works offline. The three image controls (FORGE SC-1 to SC-3) then count only Kyverno failures, never passes, and say so in a note: Kyverno also writes a pass for pods an image policy does not apply to, and without the pod list the pods in scope are unknown. Without a failure they read NO DATA |
 | `--cosign PATH`, `--cosign-timeout D` | cosign binary (default from `PATH`) and time limit per call (default 90s) |
 | `--retries N` | repeat a cosign call that ended in an error (network, TUF) N times, 3 s apart (default 1); a FAIL is never repeated |
 | `--max-scan-age D` | oldest vulnerability scan that counts as fresh (default 720h, the window of the `ecr-vuln` policy) |

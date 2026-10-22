@@ -54,6 +54,8 @@ type ControlRow struct {
 	// ImageChecks counts the independent cosign checks behind a FORGE control (nil otherwise).
 	ImageChecks *ImageCounts `json:"imageChecks,omitempty"`
 	Findings    []Finding    `json:"findings,omitempty"`
+	// Note explains a status that a reader could misread (set only when the image stage is skipped).
+	Note string `json:"note,omitempty"`
 }
 
 // Counts of PolicyReport results, by result value.

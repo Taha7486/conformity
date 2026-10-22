@@ -328,10 +328,53 @@ results:
 	if rep.Scope.Results != 3 {
 		t.Errorf("the scope still counts every result read: %+v", rep.Scope)
 	}
-	// Without the image stage nothing tells which pods are in scope, so all three count.
+	// Without the image stage nothing tells which pods are in scope, so the three passes are
+	// not evidence and the control has no data.
 	plain, _ := Evaluate(snap, n, "t")
-	if row := controlRow(plain, "FORGE SC-1"); row.Counts.Pass != 3 {
-		t.Errorf("policy-report-only counts = %+v", row.Counts)
+	if row := controlRow(plain, "FORGE SC-1"); row.Counts.Pass != 0 || row.Status != StatusNoData || row.Note != SkippedImagesNote {
+		t.Errorf("policy-report-only row = %+v", row)
+	}
+}
+
+// A Kyverno fail on an image control is real even without the image stage: only the
+// passes are dropped.
+func TestSkippedImageStageKeepsKyvernoFailures(t *testing.T) {
+	snap := load(t, "spike-policy", "pods")
+	snap.Reports = append(snap.Reports,
+		doc(t, `apiVersion: wgpolicyk8s.io/v1alpha2
+kind: PolicyReport
+metadata: {name: r1, namespace: demo}
+scope: {kind: Pod, name: golden-pinned, namespace: demo, uid: u1}
+results:
+- {policy: spike-ivp, rule: spike-ivp, result: pass, message: success, timestamp: {seconds: 1760000000}}
+`),
+		doc(t, `apiVersion: wgpolicyk8s.io/v1alpha2
+kind: PolicyReport
+metadata: {name: r2, namespace: demo}
+scope: {kind: Pod, name: unsigned, namespace: demo, uid: u2}
+results:
+- {policy: spike-ivp, rule: spike-ivp, result: fail, message: "no signatures found", timestamp: {seconds: 1760000000}}
+`))
+	rep, err := Evaluate(snap, now, "t")
+	if err != nil {
+		t.Fatal(err)
+	}
+	row := controlRow(rep, "FORGE SC-1")
+	if row.Status != StatusFail || row.Counts.Pass != 0 || row.Counts.Fail != 1 || len(row.Findings) != 1 || row.Note == "" {
+		t.Errorf("SC-1 = %+v", row)
+	}
+}
+
+// Controls that are not image controls keep their Kyverno passes and carry no note.
+func TestSkippedImageStageLeavesOtherControlsAlone(t *testing.T) {
+	rep, err := Evaluate(load(t, "spike-policy", "pods"), now, "t")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, c := range rep.Controls {
+		if c.Framework != "FORGE" && c.Note != "" {
+			t.Errorf("%s carries a note: %q", c.Key(), c.Note)
+		}
 	}
 }
 

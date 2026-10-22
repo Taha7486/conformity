@@ -767,7 +767,8 @@
         "warn": 0,
         "error": 0,
         "skip": 0
-      }
+      },
+      "note": "Image checks were skipped (--skip-images). Kyverno writes a pass for every pod an image policy does not apply to, and without the pod list conformity cannot tell which pods are in scope, so passes are not counted here; failures are."
     },
     {
       "framework": "FORGE",
@@ -783,7 +784,8 @@
         "warn": 0,
         "error": 0,
         "skip": 0
-      }
+      },
+      "note": "Image checks were skipped (--skip-images). Kyverno writes a pass for every pod an image policy does not apply to, and without the pod list conformity cannot tell which pods are in scope, so passes are not counted here; failures are."
     },
     {
       "framework": "FORGE",
@@ -799,7 +801,8 @@
         "warn": 0,
         "error": 0,
         "skip": 0
-      }
+      },
+      "note": "Image checks were skipped (--skip-images). Kyverno writes a pass for every pod an image policy does not apply to, and without the pod list conformity cannot tell which pods are in scope, so passes are not counted here; failures are."
     }
   ],
   "policies": [

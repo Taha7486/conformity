@@ -69,6 +69,13 @@ func WriteText(w io.Writer, r *Report) error {
 		sort.Strings(cs)
 		fmt.Fprintf(w, "DISAGREEMENT %s  %s: Kyverno %s (%s); conformity %s\n", d.Policy, d.Resource, d.Kyverno, d.KyvernoMessage, strings.Join(cs, ", "))
 	}
+	noted := false
+	for _, c := range r.Controls {
+		if c.Note != "" && !noted {
+			fmt.Fprintf(w, "NOTE %s\n", c.Note)
+			noted = true
+		}
+	}
 	for _, c := range r.Controls {
 		for _, f := range c.Findings {
 			fmt.Fprintf(w, "FINDING %s  %s  %s  %s\n", c.Key(), f.Policy, f.Resource, f.Result)

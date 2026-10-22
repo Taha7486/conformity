@@ -89,6 +89,21 @@ func WriteMarkdown(w io.Writer, r *Report) error {
 				c.Counts.Fail+c.Counts.Warn+c.Counts.Error, img, esc(strings.Join(c.Policies, ", ")))
 		}
 		p("\n")
+		// One line per distinct note, naming every control it applies to.
+		var notes []string
+		keys := map[string][]string{}
+		for _, c := range rows {
+			if c.Note == "" {
+				continue
+			}
+			if keys[c.Note] == nil {
+				notes = append(notes, c.Note)
+			}
+			keys[c.Note] = append(keys[c.Note], c.Key())
+		}
+		for _, n := range notes {
+			p("**%s:** %s\n\n", esc(strings.Join(keys[n], ", ")), esc(n))
+		}
 	}
 
 	any := false

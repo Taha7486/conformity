@@ -62,6 +62,8 @@ How to read a status: a control is **FAIL** if any result of its policies is fai
 | SC-2 Signed SBOM attestation present | **NO DATA** | 0 / 0 | - | forge-ecr-sbom |
 | SC-3 Signed, fresh vulnerability scan attestation | **NO DATA** | 0 / 0 | - | forge-ecr-vuln |
 
+**FORGE SC-1, FORGE SC-2, FORGE SC-3:** Image checks were skipped (--skip-images). Kyverno writes a pass for every pod an image policy does not apply to, and without the pod list conformity cannot tell which pods are in scope, so passes are not counted here; failures are.
+
 ## Findings
 
 Every result that kept a control from passing. A Deployment and its Pod each have a report, and a policy that enforces several controls counts under each of them, so one cause can appear more than once.

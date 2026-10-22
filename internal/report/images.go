@@ -28,6 +28,30 @@ var forgeReportOnly = map[string]bool{
 	"SC-4": true,
 }
 
+// SkippedImagesNote is shown on the image controls when the image stage did not run.
+const SkippedImagesNote = "Image checks were skipped (--skip-images). Kyverno writes a pass for every pod an image policy does not apply to, and without the pod list conformity cannot tell which pods are in scope, so passes are not counted here; failures are."
+
+// isImageControl is true for the FORGE controls that conformity proves with cosign.
+func isImageControl(c catalog.Control) bool {
+	_, ok := forgeChecks[c.ID]
+	return c.Framework == catalog.FORGE && ok
+}
+
+// skipImageControls is the report without the image stage. A Kyverno fail on an image
+// control is real (the policy matched that pod), but a pass is not evidence: it is also
+// written for pods outside the policy's image scope. So only the failures are kept, and a
+// control without any reads NO DATA instead of a vacuous PASS.
+func skipImageControls(rep *Report) {
+	for i := range rep.Controls {
+		row := &rep.Controls[i]
+		if !isImageControl(row.Control) {
+			continue
+		}
+		row.Counts.Pass, row.Counts.Skip = 0, 0
+		row.Note = SkippedImagesNote
+	}
+}
+
 // imagePolicy is one (policy, control) pair that needs an image check.
 type imagePolicy struct {
 	policy   string
